@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Menú principal bajo Contabilidad -->
+    <menuitem id="menu_modelos" name="Modelos" parent="account.menu_finance"/>
+
+    <!-- Acción y acceso directo al Modelo 200 -->
+    <menuitem id="menu_modelo_200_direct" name="Modelo 200"
+              parent="menu_modelos"
+              action="action_modelo_200"/>
+</odoo>

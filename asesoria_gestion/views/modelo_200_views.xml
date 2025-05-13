@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_form_modelo_200" model="ir.ui.view">
+        <field name="name">modelo.200.form</field>
+        <field name="model">asesoria.modelo_200</field>
+        <field name="arch" type="xml">
+            <form string="Modelo 200">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="nif"/>
+                        <field name="ejercicio"/>
+                        <field name="tipo_ejercicio"/>
+                        <field name="periodo"/>
+                        <field name="base_imponible"/>
+                        <field name="cuota_integra"/>
+                        <field name="cuota_cero"/>
+                        <field name="ingreso"/>
+                        <field name="devolucion"/>
+                        <field name="iban"/>
+                        <field name="renuncia_devolucion"/>
+                        <field name="fraccionamiento"/>
+                        <field name="resultado_aid_abono"/>
+                        <field name="resultado_aid_compensacion"/>
+                        <field name="resultado_aid_ingreso"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tree_modelo_200" model="ir.ui.view">
+        <field name="name">modelo.200.tree</field>
+        <field name="model">asesoria.modelo_200</field>
+        <field name="arch" type="xml">
+            <tree string="Modelo 200">
+                <field name="name"/>
+                <field name="nif"/>
+                <field name="ejercicio"/>
+                <field name="base_imponible"/>
+                <field name="cuota_integra"/>
+                <field name="ingreso"/>
+                <field name="devolucion"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_modelo_200" model="ir.actions.act_window">
+        <field name="name">Modelo 200</field>
+        <field name="res_model">asesoria.modelo_200</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_modelo_200" name="Modelo 200"
+              parent="menu_modelos"
+              action="action_modelo_200"/>
+</odoo>

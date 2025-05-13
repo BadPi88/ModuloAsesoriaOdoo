@@ -1,0 +1,56 @@
+<odoo>
+  <record id="modelo200_declaration_form" model="ir.ui.view">
+    <field name="name">modelo200.declaration.form</field>
+    <field name="model">modelo200.declaration</field>
+    <field name="arch" type="xml">
+      <form string="Declaración Modelo 200">
+        <header>
+          <button name="action_generate_xml" type="object" string="Generar XML" states="draft" class="btn-primary"/>
+        </header>
+        <sheet>
+          <group>
+            <field name="company_id"/>
+            <field name="fiscal_year"/>
+            <field name="date_start"/>
+            <field name="date_end"/>
+          </group>
+          <group string="Balance">
+            <field name="bs_assets_total"/>
+            <field name="bs_equity_liabs_total"/>
+          </group>
+          <group string="PyG">
+            <field name="pl_net_turnover"/>
+            <field name="pl_profit_before_tax"/>
+            <field name="pl_profit_after_tax"/>
+          </group>
+          <group string="PN">
+            <field name="equity_start"/>
+            <field name="equity_end"/>
+          </group>
+          <field name="xml_file" filename="xml_filename"/>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="modelo200_declaration_tree" model="ir.ui.view">
+    <field name="name">modelo200.declaration.tree</field>
+    <field name="model">modelo200.declaration</field>
+    <field name="arch" type="xml">
+      <tree string="Declaraciones Modelo 200">
+        <field name="company_id"/>
+        <field name="fiscal_year"/>
+        <field name="state"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="action_modelo200_declaration" model="ir.actions.act_window">
+    <field name="name">Modelo 200</field>
+    <field name="res_model">modelo200.declaration</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <menuitem id="menu_modelo200_root" name="Modelo 200" parent="account.menu_finance" sequence="50"/>
+  <menuitem id="menu_modelo200_declaration" name="Declaraciones" parent="menu_modelo200_root" action="action_modelo200_declaration"/>
+</odoo>
