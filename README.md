@@ -8,7 +8,7 @@ Módulo desarrollado para Odoo 16 que permite la gestión de modelos fiscales y 
 - XML
 
 ## Estado del proyecto
-Actualmente en fase de investigacion. En las próximas semanas se avanzará en la programación de las funcionalidades principales.
+Actualmente en fase de desarrollo. En las próximas semanas se avanzará en la programación de las funcionalidades mas avanzadas.
 
 ## Autor
 **Miguel Martin**  

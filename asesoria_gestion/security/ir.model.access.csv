@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_modelo_303,access.asesoria.modelo_303,model_asesoria_modelo_303,,1,1,1,1
-access_modelo_390,access_modelo_390,model_asesoria_modelo_390,,1,1,1,1
-access_modelo_390,access_modelo_390,model_asesoria_modelo_200,,1,1,1,1
