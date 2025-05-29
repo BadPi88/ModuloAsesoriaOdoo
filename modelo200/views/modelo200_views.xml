@@ -5,614 +5,865 @@
     <field name="model">modelo200.declaration</field>
     <field name="arch" type="xml">
       <form string="Declaración Modelo 200">
-    <header>
-        <button name="action_generate_xml" type="object" string="Descargar XML" class="btn-primary"/>
-    </header>
+        <header>
+          <button name="action_generate_xml" type="object" string="Descargar XML"
+            class="btn-primary" />
+        </header>
 
         <header>
-          <button name="action_generate_xml" type="object" string="Generar XML" states="draft" class="btn-primary"/>
+          <button name="action_generate_xml" type="object" string="Generar XML" states="draft"
+            class="btn-primary" />
         </header>
         <sheet>
-          <group string="Identificación AEAT"><field name="t00001"/><field name="t00003"/><field name="t00006"/><field name="t00011"/><field name="t00012"/></group><group col="2">
-            <field name="company_id"/>
-            <field name="fiscal_year"/>
-            <field name="date_start"/>
-            <field name="date_end"/>
+          <group string="Identificación AEAT">
+            <field name="t00001" />
+            <field name="t00003" />
+            <field name="t00006" />
+            <field name="t00011" />
+            <field name="t00012" />
+          </group>
+          <group col="2">
+            <field name="company_id" />
+            <field name="fiscal_year" />
+            <field name="date_start" />
+            <field name="date_end" />
           </group>
           <notebook>
+            <!-- P00003 -->
+
             <page string="Balance: Activo (I)">
+              <group col="5">
+                <group>
+                  <field name="t00101" string="ACTIVO NO CORRIENTE [00101]" />
+                  <field name="t00102" string="Inmovilizado intangible  [00102]" />
+                  <field name="t00103" string="Desarrollo  [00103]" />
+                  <field name="t00104" string="Concesiones  [00104]" />
+                  <field name="t00105" string="Patentes, licencias, marcas y similares  [00105]" />
+                  <field name="t00106" string="Fondo de comercio  [00106]" />
+                  <field name="t00107" string="Aplicaciones informáticas  [00107]" />
+                  <field name="t00108" string="Investigación  [00108]" />
+                  <field name="t00700" string="Propiedad intelectual  [00700]" />
+                  <field name="t00109" string="Otro inmovilizado intangible  [00109]" />
+                </group>
+
+                <group>
+                  <field name="t00110" string="Resto  [00110]" />
+                  <field name="t00111" string="Inmovilizado material  [00111]" />
+                  <field name="t00112" string="Terrenos y construcciones  [00112]" />
+                  <field name="t00113"
+                    string="Instalaciones técnicas y otro inmovilizado material  [00113]" />
+                  <field name="t00114" string="Inmovilizado en curso y anticipos [00114]" />
+                  <field name="t00115" string="Inversiones inmobiliarias [00115]" />
+                  <field name="t00116" string="Terrenos [00116]" />
+                  <field name="t00117" string="Construcciones [00117]" />
+                  <field name="t00118"
+                    string="Inversiones en empresas del grupo y asociadas a largo plazo  [00118]" />
+                  <field name="t00119" string="Instrumentos de patrimonio [00119]" />
+                </group>
+
+                <group>
+                  <field name="t00120" string="Créditos a empresas [00120]" />
+                  <field name="t00121" string="Valores representativos de deuda [00121]" />
+                  <field name="t00122" string="Derivados [00122]" />
+                  <field name="t00123" string="Otros activos financieros [00123]" />
+                  <field name="t00124" string="Otras inversiones [00124]" />
+                  <field name="t00125" string="Resto [00125]" />
+                  <field name="t00126" string="Inversiones financieras a largo plazo [00126]" />
+                  <field name="t00127" string="Instrumentos de patrimonio [00127]" />
+                  <field name="t00128" string="Créditos a terceros [00128]" />
+                  <field name="t00129" string="Valores representativos de deuda [00129]" />
+                </group>
+
+                <group>
+                  <field name="t00130" string="Derivados [00130]" />
+                  <field name="t00131" string="Otros activos financieros [00131]" />
+                  <field name="t00132" string="Otras inversiones [00132]" />
+                  <field name="t00133" string="Resto [00133]" />
+                  <field name="t00134" string="Activos por impuesto diferido [00134]" />
+                  <field name="t00135" string="Deudores comerciales no corrientes [00135]" />
+                  <field name="t00136" string="ACTIVO CORRIENTE [00136]" />
+                  <field name="t00137"
+                    string="Activos no corrientes mantenidos para la venta [00137]" />
+                  <field name="t00138" string="Existencias [00138]" />
+                  <field name="t00139" string="Comerciales  [00139]" />
+                </group>
+
+                <group>
+                  <field name="t00140" string="Materias primas y otros aprovisionamientos [00140]" />
+                  <field name="t00141" string="Productos en curso [00141]" />
+                  <field name="t00142"
+                    string="Productos en curso - De ciclo largo de producción  [00142]" />
+                  <field name="t00143"
+                    string="Productos en curso - De ciclo corto de producción  [00143]" />
+                  <field name="t00144" string="Productos terminados [00144]" />
+                  <field name="t00145"
+                    string="Productos terminados - De ciclo largo de producción  [00145]" />
+                  <field name="t00146"
+                    string="Productos terminados - De ciclo corto de producción  [00146]" />
+                  <field name="t00147"
+                    string="Subproductos, residuos y materiales recuperados [00147]" />
+                  <field name="t00148" string="Anticipos a proveedores [00148]" />
+                  <field name="t00701"
+                    string="Derechos de emisión de gases de efecto invernadero [00701]" />
+                </group>
+              </group>
+
+            </page>
+
+
+            <!-- p4 -->
+            <page string=" Balance: Activo (II)">
               <group col="4">
                 <group>
-                  <field name="t00001" string="Inicio del identificador de modelo y página."/>
-                  <field name="t00012" string="Indicador de página complementaria."/>
-                  <field name="t00064" string="Concesiones  [00104]"/>
-                  <field name="t00132" string="Investigación  [00108]"/>
-                  <field name="t00200" string="Inmovilizado material  [00111]"/>
-                  <field name="t00268" string="Inversiones inmobiliarias [00115]"/>
-                  <field name="t00336" string="Instrumentos de patrimonio [00119]"/>
-                  <field name="t00404" string="Otros activos financieros [00123]"/>
-                  <field name="t00472" string="Instrumentos de patrimonio [00127]"/>
-                  <field name="t00540" string="Otros activos financieros [00131]"/>
-                  <field name="t00608" string="Deudores comerciales no corrientes [00135]"/>
-                  <field name="t00676" string="Comerciales  [00139]"/>
-                  <field name="t00744" string="De ciclo corto de producción  [00143]"/>
-                  <field name="t00812" string="Subproductos, residuos y materiales recuperados [00147]"/>
-                  <field name="t01063" string="Identificador de fin de registro"/>
+                  <field name="t00149"
+                    string="Deudores comerciales y otras cuentas a cobrar [00149]" />
+                  <field name="t00150"
+                    string="Clientes por ventas y prestaciones de servicios [00150]" />
+                  <field name="t00151"
+                    string="Clientes por ventas y prestaciones de servicios - Clientes por ventas y prestaciones de servicios a largo plazo [00151]" />
+                  <field name="t00152"
+                    string="Clientes por ventas y prestaciones de servicios - Clientes por ventas y prestaciones de servicios a corto plazo [00152]" />
+                  <field name="t00153" string="Clientes empresas del grupo y asociadas [00153]" />
+                  <field name="t00154" string="Deudores varios [00154]" />
+                  <field name="t00155" string="Personal [00155]" />
+                  <field name="t00156" string="Activos por impuesto corriente [00156]" />
+                  <field name="t00157"
+                    string="Otros créditos con las Administraciones Públicas [00157]" />
+                  <field name="t00158"
+                    string="Accionistas (socios) por desembolsos exigidos [00158]" />
                 </group>
+
                 <group>
-                  <field name="t00003" string="Modelo."/>
-                  <field name="t00013" string="ACTIVO NO CORRIENTE [00101]"/>
-                  <field name="t00081" string="Patentes, licencias, marcas y similares  [00105]"/>
-                  <field name="t00149" string="Propiedad intelectual  [00700]"/>
-                  <field name="t00217" string="Terrenos y construcciones  [00112]"/>
-                  <field name="t00285" string="Terrenos [00116]"/>
-                  <field name="t00353" string="Créditos a empresas [00120]"/>
-                  <field name="t00421" string="Otras inversiones [00124]"/>
-                  <field name="t00489" string="Créditos a terceros [00128]"/>
-                  <field name="t00557" string="Otras inversiones [00132]"/>
-                  <field name="t00625" string="ACTIVO CORRIENTE [00136]"/>
-                  <field name="t00693" string="Materias primas y otros aprovisionamientos [00140]"/>
-                  <field name="t00761" string="Productos terminados [00144]"/>
-                  <field name="t00829" string="Anticipos a proveedores [00148]"/>
+                  <field name="t00159" string="Otros deudores [00159]" />
+                  <field name="t00160"
+                    string="Inversiones en empresas del grupo y asociadas a corto plazo [00160]" />
+                  <field name="t00161" string="Instrumentos de patrimonio  [00161]" />
+                  <field name="t00162" string="Créditos a empresas  [00162]" />
+                  <field name="t00163" string="Valores representativos de deuda  [00163]" />
+                  <field name="t00164" string="Derivados  [00164]" />
+                  <field name="t00165" string="Otros activos financieros  [00165]" />
+                  <field name="t00166" string="Otras inversiones  [00166]" />
+                  <field name="t00167" string="Resto  [00167]" />
+                  <field name="t00168" string="Inversiones financieras a corto plazo  [00168]" />
                 </group>
+
                 <group>
-                  <field name="t00006" string="Página." invisible="1" nolabel="1" default="3"/>
-                  <field name="t00030" string="Inmovilizado intangible  [00102]"/>
-                  <field name="t00098" string="Fondo de comercio  [00106]"/>
-                  <field name="t00166" string="Otro inmovilizado intangible  [00109]"/>
-                  <field name="t00234" string="Instalaciones técnicas y otro inmovilizado material  [00113]"/>
-                  <field name="t00302" string="Construcciones [00117]"/>
-                  <field name="t00370" string="Valores representativos de deuda [00121]"/>
-                  <field name="t00438" string="Resto [00125]"/>
-                  <field name="t00506" string="Valores representativos de deuda [00129]"/>
-                  <field name="t00574" string="Resto [00133]"/>
-                  <field name="t00642" string="Activos no corrientes mantenidos para la venta [00137]"/>
-                  <field name="t00710" string="Productos en curso [00141]"/>
-                  <field name="t00778" string="De ciclo largo de producción  [00145]"/>
-                  <field name="t00846" string="Derechos de emisión de gases de efecto invernadero [00701]"/>
+                  <field name="t00169" string="Instrumentos de patrimonio  [00169]" />
+                  <field name="t00170" string="Créditos a empresas  [00170]" />
+                  <field name="t00171" string="Valores representativos de deuda [00171]" />
+                  <field name="t00172" string="Derivados [00172]" />
+                  <field name="t00173" string="Otros activos financieros [00173]" />
+                  <field name="t00174" string="Otras inversiones [00174]" />
+                  <field name="t00175" string="Resto [00175]" />
+                  <field name="t00176" string="Periodificaciones a corto plazo [00176]" />
+                  <field name="t00177"
+                    string="Efectivo y otros activos líquidos equivalentes [00177]" />
+                  <field name="t00178" string="Tesorería [00178]" />
                 </group>
+
                 <group>
-                  <field name="t00011" string="Fin de identificador de modelo."/>
-                  <field name="t00047" string="Desarrollo  [00103]"/>
-                  <field name="t00115" string="Aplicaciones informáticas  [00107]"/>
-                  <field name="t00183" string="Resto  [00110]"/>
-                  <field name="t00251" string="Inmovilizado en curso y anticipos [00114]"/>
-                  <field name="t00319" string="Inversiones en empresas del grupo y asociadas a largo plazo  [00118]"/>
-                  <field name="t00387" string="Derivados [00122]"/>
-                  <field name="t00455" string="Inversiones financieras a largo plazo [00126]"/>
-                  <field name="t00523" string="Derivados [00130]"/>
-                  <field name="t00591" string="Activos por impuesto diferido [00134]"/>
-                  <field name="t00659" string="Existencias [00138]"/>
-                  <field name="t00727" string="De ciclo largo de producción  [00142]"/>
-                  <field name="t00795" string="De ciclo corto de producción  [00146]"/>
-                  <field name="t00863" string="RESERVADO PARA LA AEAT"/>
+                  <field name="t00179" string="Otros activos líquidos equivalentes [00179]" />
+                  <field name="t00180" string="TOTAL ACTIVO [00180]" />
                 </group>
               </group>
             </page>
-            <page string="Balance: Activo (II)">
-              <group col="4">
+
+            <!--P5-->
+            <page string=" Balance: Patrimonio neto y pasivo">
+              <group col="6">
                 <group>
-                  <field name="t00001" string="Inicio del identificador de modelo y página. Constante "/>
-                  <field name="t00012" string="Indicador de página complementaria. En blanco"/>
-                  <field name="t00064" string="Clientes por ventas y prestaciones de servicios a corto plazo [00152]"/>
-                  <field name="t00132" string="Activos por impuesto corriente [00156]"/>
-                  <field name="t00200" string="Inversiones en empresas del grupo y asociadas a corto plazo [00160]"/>
-                  <field name="t00268" string="Derivados  [00164]"/>
-                  <field name="t00336" string="Inversiones financieras a corto plazo  [00168]"/>
-                  <field name="t00404" string="Derivados [00172]"/>
-                  <field name="t00472" string="Periodificaciones a corto plazo [00176]"/>
-                  <field name="t00540" string="TOTAL ACTIVO [00180]"/>
+                  <field name="t00185" string="PATRIMONIO NETO [00185]" />
+                  <field name="t00186" string="Fondos propios [00186]" />
+                  <field name="t00187" string="Capital [00187]" />
+                  <field name="t00188" string="Capital escriturado [00188]" />
+                  <field name="t00189" string="Capital no exigido [00189]" />
+                  <field name="t00764" string="Capital cooperativo suscrito (cooperativas) [00764]" />
+                  <field name="t00765"
+                    string="Capital cooperativo no exigido (cooperativas) [00765]" />
+                  <field name="t00190" string="Prima de emisión [00190]" />
+                  <field name="t00191" string="Reservas [00191]" />
+                  <field name="t00192" string="Legal y estatutarias [00192]" />
                 </group>
+
                 <group>
-                  <field name="t00003" string="Modelo."/>
-                  <field name="t00013" string="Deudores comerciales y otras cuentas a cobrar [00149]"/>
-                  <field name="t00081" string="Clientes empresas del grupo y asociadas [00153]"/>
-                  <field name="t00149" string="Otros créditos con las Administraciones Públicas [00157]"/>
-                  <field name="t00217" string="Instrumentos de patrimonio  [00161]"/>
-                  <field name="t00285" string="Otros activos financieros  [00165]"/>
-                  <field name="t00353" string="Instrumentos de patrimonio  [00169]"/>
-                  <field name="t00421" string="Otros activos financieros [00173]"/>
-                  <field name="t00489" string="Efectivo y otros activos líquidos equivalentes [00177]"/>
-                  <field name="t00557" string="RESERVADO PARA LA AEAT"/>
+                  <field name="t00193" string="Otras reservas [00193]" />
+                  <field name="t00702" string="Reserva de revalorización [00702]" />
+                  <field name="t01001" string="Reserva de capitalización [01001]" />
+                  <field name="t01002" string="Reserva de nivelación [01002]" />
+                  <field name="t00712" string="Fondo de reserva obligatorio de cooperativas [00712]" />
+                  <field name="t00766"
+                    string="Fondo de reembolso o actualización (cooperativas) [00766]" />
+                  <field name="t00767" string="Fondo de reserva voluntario (cooperativas) [00767]" />
+                  <field name="t00194"
+                    string="Acciones y participaciones en patrimonio propias [00194]" />
+                  <field name="t00195" string="Resultados de ejercicios anteriores [00195]" />
+                  <field name="t00196" string="Remanente [00196]" />
                 </group>
+
                 <group>
-                  <field name="t00006" string="Página." invisible="1" nolabel="1" default="4"/>
-                  <field name="t00030" string="Clientes por ventas y prestaciones de servicios [00150]"/>
-                  <field name="t00098" string="Deudores varios [00154]"/>
-                  <field name="t00166" string="Accionistas (socios) por desembolsos exigidos [00158]"/>
-                  <field name="t00234" string="Créditos a empresas  [00162]"/>
-                  <field name="t00302" string="Otras inversiones  [00166]"/>
-                  <field name="t00370" string="Créditos a empresas  [00170]"/>
-                  <field name="t00438" string="Otras inversiones [00174]"/>
-                  <field name="t00506" string="Tesorería [00178]"/>
-                  <field name="t00757" string="Identificador de fin de registro"/>
+                  <field name="t00197"
+                    string="Resultados negativos de ejercicios anteriores [00197]" />
+                  <field name="t00198" string="Otras aportaciones de socios [00198]" />
+                  <field name="t00199" string="Resultado del ejercicio [00199]" />
+                  <field name="t00200" string="Dividendo a cuenta [00200]" />
+                  <field name="t00768"
+                    string="Retorno cooperativo y remuneración discrecional a cuenta entregado en el ejercicio) (cooperativas) [00768]" />
+                  <field name="t00769" string="Fondos capitalizados (cooperativas) [00769]" />
+                  <field name="t00201" string="Otros instrumentos de patrimonio neto [00201]" />
+                  <field name="t00202" string="Ajustes por cambios de valor [00202]" />
+                  <field name="t00203"
+                    string="Activos financieros a valor razonable con cambios en el patrimonio neto [00203]" />
+                  <field name="t00204" string="Operaciones de cobertura [00204]" />
                 </group>
+
                 <group>
-                  <field name="t00011" string="Fin de identificador de modelo."/>
-                  <field name="t00047" string="Clientes por ventas y prestaciones de servicios a largo plazo [00151]"/>
-                  <field name="t00115" string="Personal [00155]"/>
-                  <field name="t00183" string="Otros deudores [00159]"/>
-                  <field name="t00251" string="Valores representativos de deuda  [00163]"/>
-                  <field name="t00319" string="Resto  [00167]"/>
-                  <field name="t00387" string="Valores representativos de deuda [00171]"/>
-                  <field name="t00455" string="Resto [00175]"/>
-                  <field name="t00523" string="Otros activos líquidos equivalentes [00179]"/>
+                  <field name="t00205" string="Activos no corrientes y pasivos vinculados [00205]" />
+                  <field name="t00206" string="Diferencia de conversión [00206]" />
+                  <field name="t00207" string="Otros [00207]" />
+                  <field name="t00208" string="Ajustes en patrimonio neto [00208]" />
+                  <field name="t00209" string="Subvenciones, donaciones y legados recibidos [00209]" />
+                  <field name="t00210" string="PASIVO NO CORRIENTE [00210]" />
+                  <field name="t00780"
+                    string="Fondo de Educación, Formación y Promoción a largo plazo (cooperativas) [00780]" />
+                  <field name="t00781"
+                    string="Deudas con características especiales a largo plazo (cooperativas) [00781]" />
+                  <field name="t00782" string="Capital reembolsable exigible (cooperativas) [00782]" />
+                  <field name="t00783"
+                    string=" Fondos especiales calificados como pasivo (cooperativas) [00783]" />
                 </group>
-              </group>
-            </page>
-            <page string="Balance: Patrimonio neto y pasivo (I)">
-              <group col="4">
+
                 <group>
-                  <field name="t00001" string="Inicio del identificador de modelo y página."/>
-                  <field name="t00012" string="Indicador de página complementaria."/>
-                  <field name="t00064" string="Capital escriturado [00188]"/>
-                  <field name="t00132" string="Prima de emisión [00190]"/>
-                  <field name="t00200" string="Reserva de revalorización [00702]"/>
-                  <field name="t00268" string="Fondo de reembolso o actualización (cooperativas) [00766]"/>
-                  <field name="t00336" string="Remanente [00196]"/>
-                  <field name="t00404" string="Dividendo a cuenta [00200]"/>
-                  <field name="t00472" string="Ajustes por cambios de valor [00202]"/>
-                  <field name="t00540" string="Diferencia de conversión [00206]"/>
-                  <field name="t00608" string="PASIVO NO CORRIENTE [00210]"/>
-                  <field name="t00676" string="Fondos especiales calificados como pasivo (cooperativas) [00783]"/>
-                  <field name="t00744" string="Actuaciones medioambientales [00213]"/>
-                  <field name="t00812" string="Obligaciones y otros valores negociables [00217]"/>
-                  <field name="t00880" string="Otros pasivos financieros [00221]"/>
-                  <field name="t00948" string="Periodificaciones a largo plazo [00225]"/>
-                  <field name="t01199" string="Identificador de fin de registro"/>
+                  <field name="t00784"
+                    string="Acreedores por fondos capitalizados a largo plazo (cooperativas) [00784]" />
+                  <field name="t00211" string=" Provisiones a largo plazo [00211]" />
+                  <field name="t00212"
+                    string="Obligaciones por prestaciones a largo plazo al personal [00212]" />
+                  <field name="t00213" string=" Actuaciones medioambientales [00213]" />
+                  <field name="t00214" string=" Provisiones por reestructuración [00214]" />
+                  <field name="t00215" string=" Otras provisiones [00215]" />
+                  <field name="t00216" string=" Deudas a largo plazo [00216]" />
+                  <field name="t00217" string=" Obligaciones y otros valores negociables [00217]" />
+                  <field name="t00218" string=" Deudas con entidades de crédito [00218]" />
+                  <field name="t00219" string=" Acreedores por arrendamiento financiero [00219]" />
                 </group>
+
                 <group>
-                  <field name="t00003" string="Modelo."/>
-                  <field name="t00013" string="PATRIMONIO NETO [00185]"/>
-                  <field name="t00081" string="Capital no exigido [00189]"/>
-                  <field name="t00149" string="Reservas [00191]"/>
-                  <field name="t00217" string="Reserva de capitalización [01001]"/>
-                  <field name="t00285" string="Fondo de reserva voluntario (cooperativas) [00767]"/>
-                  <field name="t00353" string="Resultados negativos de ejercicios anteriores [00197]"/>
-                  <field name="t00421" string="Retorno cooperativo y remuneración discrecional a cuenta entregado en el ejercicio) (cooperativas) [00768]"/>
-                  <field name="t00489" string="Activos financieros a valor razonable con cambios en el patrimonio neto [00203]"/>
-                  <field name="t00557" string="Otros [00207]"/>
-                  <field name="t00625" string="Fondo de Educación, Formación y Promoción a largo plazo (cooperativas) [00780]"/>
-                  <field name="t00693" string="Acreedores por fondos capitalizados a largo plazo (cooperativas) [00784]"/>
-                  <field name="t00761" string="Provisiones por reestructuración [00214]"/>
-                  <field name="t00829" string="Deudas con entidades de crédito [00218]"/>
-                  <field name="t00897" string="Otras deudas a largo plazo [00222]"/>
-                  <field name="t00965" string="Acreedores comerciales no corrientes [00226]"/>
-                </group>
-                <group>
-                  <field name="t00006" string="Página." invisible="1" nolabel="1" default="5"/>
-                  <field name="t00030" string="Fondos propios [00186]"/>
-                  <field name="t00098" string="Capital cooperativo suscrito (cooperativas) [00764]"/>
-                  <field name="t00166" string="Legal y estatutarias [00192]"/>
-                  <field name="t00234" string="Reserva de nivelación [01002]"/>
-                  <field name="t00302" string="Acciones y participaciones en patrimonio propias [00194]"/>
-                  <field name="t00370" string="Otras aportaciones de socios [00198]"/>
-                  <field name="t00438" string="Fondos capitalizados (cooperativas) [00769]"/>
-                  <field name="t00506" string="Operaciones de cobertura [00204]"/>
-                  <field name="t00574" string="Ajustes en patrimonio neto [00208]"/>
-                  <field name="t00642" string="Deudas con características especiales a largo plazo (cooperativas) [00781]"/>
-                  <field name="t00710" string="Provisiones a largo plazo [00211]"/>
-                  <field name="t00778" string="Otras provisiones [00215]"/>
-                  <field name="t00846" string="Acreedores por arrendamiento financiero [00219]"/>
-                  <field name="t00914" string="Deudas con empresas del grupo y asociadas a largo plazo [00223]"/>
-                  <field name="t00982" string="Deuda con características especiales a largo plazo [00227]"/>
-                </group>
-                <group>
-                  <field name="t00011" string="Fin de identificador de modelo."/>
-                  <field name="t00047" string="Capital [00187]"/>
-                  <field name="t00115" string="Capital cooperativo no exigido (cooperativas) [00765]"/>
-                  <field name="t00183" string="Otras reservas [00193]"/>
-                  <field name="t00251" string="Fondo de reserva obligatorio de cooperativas [00712]"/>
-                  <field name="t00319" string="Resultados de ejercicios anteriores [00195]"/>
-                  <field name="t00387" string="Resultado del ejercicio [00199]"/>
-                  <field name="t00455" string="Otros instrumentos de patrimonio neto [00201]"/>
-                  <field name="t00523" string="Activos no corrientes y pasivos vinculados [00205]"/>
-                  <field name="t00591" string="Subvenciones, donaciones y legados recibidos [00209]"/>
-                  <field name="t00659" string="Capital  reembolsable exigible (cooperativas) [00782]"/>
-                  <field name="t00727" string="Obligaciones por prestaciones a largo plazo al personal [00212]"/>
-                  <field name="t00795" string="Deudas a largo plazo [00216]"/>
-                  <field name="t00863" string="Derivados [00220]"/>
-                  <field name="t00931" string="Pasivos por impuesto diferido [00224]"/>
-                  <field name="t00999" string="RESERVADO PARA LA AEAT"/>
+                  <field name="t00220" string=" Derivados [00220]" />
+                  <field name="t00221" string=" Otros pasivos financieros [00221]" />
+                  <field name="t00222" string=" Otras deudas a largo plazo [00222]" />
+                  <field name="t00223"
+                    string="Deudas con empresas del grupo y asociadas a largo plazo [00223]" />
+                  <field name="t00224" string=" Pasivos por impuesto diferido [00224]" />
+                  <field name="t00225" string=" Periodificaciones a largo plazo [00225]" />
+                  <field name="t00226" string=" Acreedores comerciales no corrientes [00226]" />
+                  <field name="t00227"
+                    string="Deuda con características especiales a largo plazo [00227]" />
                 </group>
               </group>
             </page>
-            <page string="Balance: Patrimonio neto y pasivo (II)">
-              <group col="4">
-                <group>
-                  <field name="t00001" string="Inicio del identificador de modelo y página."/>
-                  <field name="t00012" string="Indicador de página complementaria."/>
-                  <field name="t00064" string="Capital reembolsable exigible (cooperativas) [00787]"/>
-                  <field name="t00132" string="Provisiones a corto plazo [00230]"/>
-                  <field name="t00200" string="Obligaciones y otros valores negociables [00232]"/>
-                  <field name="t00268" string="Otros pasivos financieros [00236]"/>
-                  <field name="t00336" string="Proveedores [00240]"/>
-                  <field name="t00404" string="Acreedores varios [00244]"/>
-                  <field name="t00472" string="Anticipos de clientes [00248]"/>
-                  <field name="t00540" string="TOTAL PATRIMONIO NETO Y PASIVO [00252]"/>
-                </group>
-                <group>
-                  <field name="t00003" string="Modelo."/>
-                  <field name="t00013" string="PASIVO CORRIENTE [00228]"/>
-                  <field name="t00081" string="Fondos especiales calificados como pasivo (cooperativas) [00788]"/>
-                  <field name="t00149" string="Provisiones por derechos emisión de gases de efecto invernadero [00703]"/>
-                  <field name="t00217" string="Deudas con entidades de crédito [00233]"/>
-                  <field name="t00285" string="Otras deudas a corto plazo [00237]"/>
-                  <field name="t00353" string="Proveedores a largo plazo [00241]"/>
-                  <field name="t00421" string="Personal (remuneraciones pendientes de pago) [00245]"/>
-                  <field name="t00489" string="Otros acreedores [00249]"/>
-                  <field name="t00557" string="RESERVADO PARA LA AEAT"/>
-                </group>
-                <group>
-                  <field name="t00006" string="Página." invisible="1" nolabel="1" default="6"/>
-                  <field name="t00030" string="Fondo de Educación, Formación y Promoción a corto plazo (cooperativas) [00785]"/>
-                  <field name="t00098" string="Acreedores por fondos capitalizados a corto plazo (cooperativas) [00789]"/>
-                  <field name="t00166" string="Otras provisiones [00704]"/>
-                  <field name="t00234" string="Acreedores por arrendamiento financiero [00234]"/>
-                  <field name="t00302" string="Deudas con empresas del grupo y asociadas a corto plazo [00238]"/>
-                  <field name="t00370" string="Proveedores a corto plazo [00242]"/>
-                  <field name="t00438" string="Pasivos por impuesto corriente [00246]"/>
-                  <field name="t00506" string="Periodificaciones a corto plazo [00250]"/>
-                  <field name="t00757" string="Identificador de fin de registro"/>
-                </group>
-                <group>
-                  <field name="t00011" string="Fin de identificador de modelo."/>
-                  <field name="t00047" string="Deudas con características especiales a corto plazo (cooperativas) [00786]"/>
-                  <field name="t00115" string="Pasivos vinculados con activos no corrientes [00229]"/>
-                  <field name="t00183" string="Deudas a corto plazo [00231]"/>
-                  <field name="t00251" string="Derivados [00235]"/>
-                  <field name="t00319" string="Acreedores comerciales y otras cuentas a pagar [00239]"/>
-                  <field name="t00387" string="Proveedores, empresas del grupo y asociadas [00243]"/>
-                  <field name="t00455" string="Otras deudas con las Administraciones Públicas [00247]"/>
-                  <field name="t00523" string="Deuda con características especiales a corto plazo  [00251]"/>
-                </group>
+
+            <!-- P6  Patrimonio neto y pasivo -->
+            <page string=" Balance: Patrimonio neto y pasivo (II)">
+              <group>
+                <field name="t00228" string="PASIVO CORRIENTE [00228]" />
+                <field name="t00785"
+                  string="Fondo de Educación, Formación y Promoción a corto plazo (cooperativas) [00785]" />
+                <field name="t00786"
+                  string="Deudas con características especiales a corto plazo (cooperativas) [00786]" />
+                <field name="t00787" string="Capital reembolsable exigible (cooperativas) [00787]" />
+                <field name="t00788"
+                  string="Fondos especiales calificados como pasivo (cooperativas) [00788]" />
+                <field name="t00789"
+                  string="Acreedores por fondos capitalizados a corto plazo (cooperativas) [00789]" />
+                <field name="t00229" string="Pasivos vinculados con activos no corrientes [00229]" />
+                <field name="t00230" string="Provisiones a corto plazo [00230]" />
+                <field name="t00703"
+                  string="Provisiones por derechos emisión de gases de efecto invernadero [00703]" />
+                <field name="t00704" string="Otras provisiones [00704]" />
+              </group>
+
+              <group>
+                <field name="t00231" string="Deudas a corto plazo [00231]" />
+                <field name="t00232" string="Obligaciones y otros valores negociables [00232]" />
+                <field name="t00233" string="Deudas con entidades de crédito [00233]" />
+                <field name="t00234" string="Acreedores por arrendamiento financiero [00234]" />
+                <field name="t00235" string="Derivados [00235]" />
+                <field name="t00236" string="Otros pasivos financieros [00236]" />
+                <field name="t00237" string="Otras deudas a corto plazo [00237]" />
+                <field name="t00238"
+                  string="Deudas con empresas del grupo y asociadas a corto plazo [00238]" />
+                <field name="t00239" string="Acreedores comerciales y otras cuentas a pagar [00239]" />
+                <field name="t00240" string="Proveedores [00240]" />
+              </group>
+
+              <group>
+                <field name="t00241" string="Proveedores - Proveedores a largo plazo [00241]" />
+                <field name="t00242" string="Proveedores - Proveedores a corto plazo [00242]" />
+                <field name="t00243" string="Proveedores, empresas del grupo y asociadas [00243]" />
+                <field name="t00244" string="Acreedores varios [00244]" />
+                <field name="t00245" string="Personal (remuneraciones pendientes de pago) [00245]" />
+                <field name="t00246" string="Pasivos por impuesto corriente [00246]" />
+                <field name="t00247" string="Otras deudas con las Administraciones Públicas [00247]" />
+                <field name="t00248" string="Anticipos de clientes [00248]" />
+                <field name="t00249" string="Otros acreedores [00249]" />
+                <field name="t00250" string="Periodificaciones a corto plazo [00250]" />
+              </group>
+
+              <group>
+                <field name="t00251"
+                  string="Deuda con características especiales a corto plazo  [00251]" />
+                <field name="t00252" string="TOTAL PATRIMONIO NETO Y PASIVO [00252]" />
               </group>
             </page>
+            <!-- 7 -->
             <page string="Cuenta de pérdidas y ganancias (I)">
               <group col="4">
+                <field name="t00255" string="Importe neto de la cifra de negocios [00255]" />
+                <field name="t00705"
+                  string="Ingresos carácter financiero sociedades holding [00705]" />
+                <field name="t00258"
+                  string="Variación de existencias de productos terminados y en curso de fabricación [00258]" />
+                <field name="t00760" string="Compras de mercaderías [00760]" />
+                <field name="t00763"
+                  string="Variación de materias primas y otras materias consumibles [00763]" />
+                <field name="t00263" string="Trabajos realizados por otras empresas [00263]" />
+                <field name="t00267"
+                  string="Ingresos accesorios y otros de gestión corriente - Ingresos por arrendamientos [00267]" />
+                <field name="t00271" string="Sueldos, salarios y asimilados [00271]" />
+                <field name="t00275"
+                  string="Retribuciones a largo plazo por sistemas de aportación o prestación definitiva [00275]" />
+                <field name="t00279" string="Otros gastos de explotación [00279]" />
+                <field name="t00281" string="Tributos [00281]" />
+                <field name="t00284" string="Amortización del inmovilizado [00284]" />
+                <field name="t00288" string="Deterioro y pérdidas [00288]" />
+                <field name="t00292"
+                  string="Resultados por enajenaciones y otras - Beneficios [00292]" />
+                <field name="t00792" string="Dotación (cooperativas) [00792]" />
+                <field name="t00296" string="RESULTADO DE EXPLOTACION [00296]" />
+              </group>
+
+              <group>
+                <field name="t00256" string="Ventas [00256]" />
+                <field name="t00706"
+                  string="Ingresos carácter financiero sociedades holding - De participaciones en instrumentos patrimonio [00706]" />
+                <field name="t00259"
+                  string="Trabajos realizados por la empresa para su activo [00259]" />
+                <field name="t00761" string="Variación de existencias [00761]" />
+                <field name="t00770"
+                  string="Consumo de existencias de socios (cooperativas) [00770]" />
+                <field name="t00264" string="Deterioro de mercaderías, materias primas [00264]" />
+                <field name="t00268"
+                  string="Ingresos accesorios y otros de gestión corriente - Resto [00268]" />
+                <field name="t00790" string="Servicios de trabajo de socios (cooperativas) [00790]" />
+                <field name="t00276"
+                  string="Retribuciones mediante instrumentos de patrimonio [00276]" />
+                <field name="t00280" string="Servicios exteriores [00280]" />
+                <field name="t00282"
+                  string="Pérdidas, deterioro y variación de provisiones por operaciones comerciales [00282]" />
+                <field name="t00285"
+                  string="Imputación de subvenciones de inmovilizado no financiero y otras [00285]" />
+                <field name="t00289" string="Deterioro y pérdidas - Deterioros [00289]" />
+                <field name="t00293"
+                  string="Resultados por enajenaciones y otras - Pérdidas [00293]" />
+                <field name="t00793"
+                  string="Subvenciones, donaciones y ayudas y sanciones (cooperativas) [00793]" />
+              </group>
+
+              <group>
+                <field name="t00257" string="Prestaciones de servicios [00257]" />
+                <field name="t00707"
+                  string="Ingresos carácter financiero sociedades holding - De valores negociables y otros instrumentos financieros [00707]" />
+                <field name="t00260" string="Aprovisionamientos [00260]" />
+                <field name="t00262"
+                  string="Consumo de materias primas y otras materias consumibles [00262]" />
+                <field name="t00771" string="Compras efectuadas a los socios (cooperativas) [00771]" />
+                <field name="t00265" string="Otros ingresos de explotación [00265]" />
+                <field name="t00269"
+                  string="Subvenciones de explotación incorporadas al resultado del ejercicio [00269]" />
+                <field name="t00273" string="Indemnizaciones [00273]" />
+                <field name="t00277" string="Otros gastos sociales [00277]" />
+                <field name="t00253" string="Servicios profesionales independientes [00253]" />
+                <field name="t00283" string="Otros gastos de gestión corriente [00283]" />
+                <field name="t00286" string="Excesos de provisiones [00286]" />
+                <field name="t00290" string="Deterioro y pérdidas - Reversión de deterioros [00290]" />
+                <field name="t00710"
+                  string="Deterioro y resultados por enajenaciones del inmovilizado de las sociedades holding [00710]" />
+                <field name="t00294"
+                  string="Diferencia negativa de combinaciones de negocio [00294]" />
+              </group>
+
+              <group>
+                <field name="t00711"
+                  string="Ingresos de carácter financiero de las entidades concesionarias de infraestructuras públicas [00711]" />
+                <field name="t00708"
+                  string="Ingresos carácter financiero sociedades holding - Resto [00708]" />
+                <field name="t00261" string="Consumo de mercaderías [00261]" />
+                <field name="t00762"
+                  string="Compras de materias primas y otras materias consumibles [00762]" />
+                <field name="t00772"
+                  string="Variación de existencias adquiridas a socios (cooperativas) [00772]" />
+                <field name="t00266"
+                  string="Ingresos accesorios y otros de gestión corriente [00266]" />
+                <field name="t00270" string="Gastos de personal [00270]" />
+                <field name="t00274" string="Seguridad Social a cargo de la empresa [00274]" />
+                <field name="t00278" string="Provisiones [00278]" />
+                <field name="t00254" string="Resto [00254]" />
+                <field name="t00709"
+                  string="Gastos por emisión de gases de efecto invernadero [00709]" />
+                <field name="t00287"
+                  string="Deterioro y resultado por enajenaciones del inmovilizado [00287]" />
+                <field name="t00291" string="Resultados por enajenaciones y otras [00291]" />
+                <field name="t00791"
+                  string="Fondo de Educación, Formación y Promoción (cooperativas) [00791]" />
+                <field name="t00295" string="Otros resultados [00295]" />
+              </group>
+            </page>
+
+            <!--P8 -->
+            <page string="Cuenta de pérdidas y ganancias (I) y (II)">
+              <group col="2">
+                <separator string="Cuenta de Pérdidas y Ganancias (I)" colspan="4" />
                 <group>
-                  <field name="t00001" string="Inicio del identificador de modelo y página."/>
-                  <field name="t00012" string="Indicador de página complementaria."/>
-                  <field name="t00064" string="Ingresos de carácter financiero de las entidades concesionarias de infraestructuras públicas [00711]"/>
-                  <field name="t00132" string="Resto [00708]"/>
-                  <field name="t00200" string="Consumo de mercaderías [00261]"/>
-                  <field name="t00268" string="Compras de materias primas y otras materias consumibles [00762]"/>
-                  <field name="t00336" string="Variación de existencias adquiridas a socios (cooperativas)  [00772]"/>
-                  <field name="t00404" string="Ingresos accesorios y otros de gestión corriente [00266]"/>
-                  <field name="t00472" string="Gastos de personal  [00270]"/>
-                  <field name="t00540" string="Seguridad Social a cargo de la empresa [00274]"/>
-                  <field name="t00608" string="Provisiones [00278]"/>
-                  <field name="t00676" string="Resto [00254]"/>
-                  <field name="t00744" string="Gastos por emisión de gases de efecto invernadero [00709]"/>
-                  <field name="t00812" string="Deterioro y resultado por enajenaciones del inmovilizado [00287]"/>
-                  <field name="t00880" string="Resultados por enajenaciones y otras [00291]"/>
-                  <field name="t00948" string="Fondo de Educación, Formación y Promoción (cooperativas) [00791]"/>
-                  <field name="t01016" string="Otros resultados [00295]"/>
+                  <field name="t00297" string="Ingresos financieros [00297]" />
+                  <field name="t00298"
+                    string="De participaciones en instrumentos de patrimonio [00298]" />
+                  <field name="t00299"
+                    string="De participaciones en instrumentos de patrimonio - En empresas del grupo y asociadas [00299]" />
+                  <field name="t00300"
+                    string="De participaciones en instrumentos de patrimonio - En terceros [00300]" />
+                  <field name="t00301"
+                    string="De valores negociables y otros instrumentos financieros [00301]" />
+                  <field name="t00302"
+                    string="De valores negociables y otros instrumentos financieros - De empresas del grupo y asociadas [00302]" />
+                  <field name="t00303"
+                    string="De valores negociables y otros instrumentos financieros - De terceros [00303]" />
+                  <field name="t00794"
+                    string="De valores negociables y otros instrumentos financieros - De socios (cooperativas) [00794]" />
+                  <field name="t00304"
+                    string="Imputación de subvenciones, donaciones y legados de carácter financiero [00304]" />
                 </group>
+
+                <separator string="Cuenta de Pérdidas y Ganancias (II)" colspan="2" />
                 <group>
-                  <field name="t00003" string="Modelo."/>
-                  <field name="t00013" string="Importe neto de la cifra de negocios [00255]"/>
-                  <field name="t00081" string="Ingresos carácter financiero sociedades holding [00705]"/>
-                  <field name="t00149" string="Variación de existencias de productos terminados  y en curso de fabricación  [00258]"/>
-                  <field name="t00217" string="Compras de mercaderías [00760]"/>
-                  <field name="t00285" string="Variación de materias primas y otras materias consumibles [00763]"/>
-                  <field name="t00353" string="Trabajos realizados por otras empresas [00263]"/>
-                  <field name="t00421" string="Ingresos por arrendamientos [00267]"/>
-                  <field name="t00489" string="Sueldos, salarios y asimilados [00271]"/>
-                  <field name="t00557" string="Retribuciones a largo plazo por sistemas de aportación o prestación definitiva  [00275]"/>
-                  <field name="t00625" string="Otros gastos de explotación [00279]"/>
-                  <field name="t00693" string="Tributos [00281]"/>
-                  <field name="t00761" string="Amortización del inmovilizado [00284]"/>
-                  <field name="t00829" string="Deterioro y pérdidas [00288]"/>
-                  <field name="t00897" string="Beneficios [00292]"/>
-                  <field name="t00965" string="Dotación (cooperativas) [00792]"/>
-                  <field name="t01033" string="RESULTADO DE EXPLOTACION [00296]"/>
-                </group>
-                <group>
-                  <field name="t00006" string="Página." invisible="1" nolabel="1" default="7"/>
-                  <field name="t00030" string="Ventas [00256]"/>
-                  <field name="t00098" string="De participaciones en instrumentos patrimonio [00706]"/>
-                  <field name="t00166" string="Trabajos realizados por la empresa para su activo [00259]"/>
-                  <field name="t00234" string="Variación de existencias  [00761]"/>
-                  <field name="t00302" string="Consumo de existencias de socios (cooperativas)  [00770]"/>
-                  <field name="t00370" string="Deterioro de mercaderías, materias primas [00264]"/>
-                  <field name="t00438" string="Resto [00268]"/>
-                  <field name="t00506" string="Servicios de trabajo de socios (cooperativas) [00790]"/>
-                  <field name="t00574" string="Retribuciones mediante instrumentos de patrimonio [00276]"/>
-                  <field name="t00642" string="Servicios exteriores [00280]"/>
-                  <field name="t00710" string="Pérdidas, deterioro y variación de provisiones por operaciones comerciales [00282]"/>
-                  <field name="t00778" string="Imputación de subvenciones de inmovilizado no financiero y otras [00285]"/>
-                  <field name="t00846" string="Deterioros [00289]"/>
-                  <field name="t00914" string="Pérdidas [00293]"/>
-                  <field name="t00982" string="Subvenciones, donaciones y ayudas y sanciones (cooperativas) [00793]"/>
-                  <field name="t01050" string="RESERVADO PARA LA AEAT"/>
-                </group>
-                <group>
-                  <field name="t00011" string="Fin de identificador de modelo."/>
-                  <field name="t00047" string="Prestaciones de servicios [00257]"/>
-                  <field name="t00115" string="De valores negociables y otros instrumentos financieros [00707]"/>
-                  <field name="t00183" string="Aprovisionamientos [00260]"/>
-                  <field name="t00251" string="Consumo de materias primas y otras materias consumibles [00262]"/>
-                  <field name="t00319" string="Compras efectuadas a los socios (cooperativas)  [00771]"/>
-                  <field name="t00387" string="Otros ingresos de explotación [00265]"/>
-                  <field name="t00455" string="Subvenciones de explotación incorporadas   al resultado del ejercicio  [00269]"/>
-                  <field name="t00523" string="Indemnizaciones [00273]"/>
-                  <field name="t00591" string="Otros gastos sociales [00277]"/>
-                  <field name="t00659" string="Servicios profesionales independientes [00253]"/>
-                  <field name="t00727" string="Otros gastos de gestión corriente [00283]"/>
-                  <field name="t00795" string="Excesos de provisiones [00286]"/>
-                  <field name="t00863" string="Reversión de deterioros [00290]"/>
-                  <field name="t00931" string="Deterioro y resultados por enajenaciones del inmovilizado de las sociedades holding [00710]"/>
-                  <field name="t00999" string="Diferencia negativa de combinaciones de negocio [00294]"/>
-                  <field name="t01250" string="Identificador de fin de registro"/>
+                  <field name="t00305" string="Gastos financieros [00305]" />
+                  <field name="t00306"
+                    string="Por deudas con empresas del grupo y asociadas [00306]" />
+                  <field name="t00307" string="Por deudas con terceros [00307]" />
+                  <field name="t00308" string="Por actualización de provisiones [00308]" />
+                  <field name="t00796"
+                    string="Intereses y retorno obligatorio de las aportaciones al capital social y de otros fondos calificados con características de deuda (cooperativas) [00796]" />
+                  <field name="t00309"
+                    string="Variación de valor razonable en instrumentos financieros [00309]" />
+                  <field name="t00310"
+                    string="Valor razonable con cambios en pérdidas y ganancias [00310]" />
+                  <field name="t00311"
+                    string="Transferencia de ajustes de valor razonable con cambios en el patrimonio neto [00311]" />
+                  <field name="t00312" string="Diferencias de cambio [00312]" />
+                  <field name="t00313"
+                    string="Deterioro y resultado por enajenaciones de instrumentos financieros [00313]" />
+                  <field name="t00314" string="Deterioros y pérdidas [00314]" />
+                  <field name="t00315"
+                    string="Deterioros y pérdidas - Deterioros, empresas del grupo, asociadas y vinculadas [00315]" />
+                  <field name="t00316"
+                    string="Deterioros y pérdidas - Deterioros, otras empresas [00316]" />
+                  <field name="t00317"
+                    string="Deterioros y pérdidas - Reversión de deterioros, empresas del grupo, asociadas y vinculadas [00317]" />
+                  <field name="t00318"
+                    string="Deterioros y pérdidas - Reversión de deterioros, otras empresas [00318]" />
+                  <field name="t00319" string="Resultados por enajenaciones y otras [00319]" />
+                  <field name="t00320"
+                    string="Resultados por enajenaciones y otras - Beneficios, empresas del grupo, asociadas y vinculadas [00320]" />
+                  <field name="t00321"
+                    string="Resultados por enajenaciones y otras - Beneficios, otras empresas [00321]" />
+                  <field name="t00322"
+                    string="Resultados por enajenaciones y otras - Pérdidas, empresas del grupo, asociadas y vinculadas [00322]" />
+                  <field name="t00323"
+                    string="Resultados por enajenaciones y otras - Pérdidas, otras empresas [00323]" />
+                  <field name="t00329"
+                    string="Otros ingresos y gastos de carácter financiero [00329]" />
+                  <field name="t00330"
+                    string="Incorporación al activo de gastos financieros [00330]" />
+                  <field name="t00331"
+                    string="Ingresos financieros derivados de convenios de acreedores [00331]" />
+                  <field name="t00332" string="Resto de ingresos y gastos [00332]" />
+                  <field name="t00324" string="RESULTADO FINANCIERO [00324]" />
+                  <field name="t00325" string="RESULTADO ANTES DE IMPUESTOS [00325]" />
+                  <field name="t00326" string="Impuestos sobre beneficios [00326]" />
+                  <field name="t00327"
+                    string="RESULTADO DEL EJERCICIO PROCEDENTE DE OPERACIONES CONTINUADAS [00327]" />
+                  <field name="t00328"
+                    string="RESULTADO DEL EJERCICIO PROCEDENTE DE OPERACIONES INTERRUMPIDAS NETO DE IMPUESTOS [00328]" />
+                  <field name="t00500"
+                    string="RESULTADO DE LA CUENTA DE PÉRDIDAS Y GANANCIAS [00500]" />
                 </group>
               </group>
             </page>
-            <page string="Cuenta de pérdidas y ganancias (II)">
-              <group col="4">
-                <group>
-                  <field name="t00001" string="Inicio del identificador de modelo y página."/>
-                  <field name="t00012" string="Indicador de página complementaria."/>
-                  <field name="t00064" string="En terceros [00300]"/>
-                  <field name="t00132" string="De socios (cooperativas)  [00794]"/>
-                  <field name="t00200" string="Por deudas con terceros [00307]"/>
-                  <field name="t00268" string="Valor razonable con cambios en pérdidas y ganancias [00310]"/>
-                  <field name="t00336" string="Deterioros y pérdidas [00314]"/>
-                  <field name="t00404" string="Reversión de deterioros, otras empresas [00318]"/>
-                  <field name="t00472" string="Pérdidas, empresas del grupo, asociadas y vinculadas [00322]"/>
-                  <field name="t00540" string="Ingresos financieros derivados de convenios de acreedores [00331]"/>
-                  <field name="t00608" string="Impuestos sobre beneficios [00326]"/>
-                  <field name="t00676" string="RESERVADO PARA LA AEAT"/>
-                </group>
-                <group>
-                  <field name="t00003" string="Modelo."/>
-                  <field name="t00013" string="Ingresos financieros [00297]"/>
-                  <field name="t00081" string="De valores negociables y otros instrumentos financieros [00301]"/>
-                  <field name="t00149" string="Imputación de subvenciones, donaciones y legados de carácter financiero [00304]"/>
-                  <field name="t00217" string="Por actualización de provisiones [00308]"/>
-                  <field name="t00285" string="Transferencia de ajustes de valor razonable con cambios en el patrimonio neto [00311]"/>
-                  <field name="t00353" string="Deterioros, empresas del grupo, asociadas y vinculadas [00315]"/>
-                  <field name="t00421" string="Resultados por enajenaciones y otras [00319]"/>
-                  <field name="t00489" string="Pérdidas, otras empresas [00323]"/>
-                  <field name="t00557" string="Resto de ingresos y gastos [00332]"/>
-                  <field name="t00625" string="RESULTADO DEL EJERCICIO PROCEDENTE DE OPERACIONES CONTINUADAS [00327]"/>
-                  <field name="t00876" string="Identificador de fin de registro"/>
-                </group>
-                <group>
-                  <field name="t00006" string="Página." invisible="1" nolabel="1" default="8"/>
-                  <field name="t00030" string="De participaciones en instrumentos de patrimonio [00298]"/>
-                  <field name="t00098" string="De empresas del grupo y asociadas [00302]"/>
-                  <field name="t00166" string="Gastos financieros [00305]"/>
-                  <field name="t00234" string="Intereses y retorno obligatorio de las aportaciones al capital social y de otros fondos calificados con características de deuda (cooperativas) [00796]"/>
-                  <field name="t00302" string="Diferencias de cambio [00312]"/>
-                  <field name="t00370" string="Deterioros, otras empresas [00316]"/>
-                  <field name="t00438" string="Beneficios, empresas del grupo, asociadas y vinculadas [00320]"/>
-                  <field name="t00506" string="Otros ingresos y gastos de carácter financiero [00329]"/>
-                  <field name="t00574" string="RESULTADO FINANCIERO [00324]"/>
-                  <field name="t00642" string="RESULTADO DEL EJERCICIO PROCEDENTE DE OPERACIONES INTERRUMPIDAS NETO DE IMPUESTOS [00328]"/>
-                </group>
-                <group>
-                  <field name="t00011" string="Fin de identificador de modelo."/>
-                  <field name="t00047" string="En empresas del grupo y asociadas [00299]"/>
-                  <field name="t00115" string="De terceros [00303]"/>
-                  <field name="t00183" string="Por deudas con empresas del grupo y asociadas [00306]"/>
-                  <field name="t00251" string="Variación de valor razonable en instrumentos financieros [00309]"/>
-                  <field name="t00319" string="Deterioro y resultado por enajenaciones de instrumentos financieros [00313]"/>
-                  <field name="t00387" string="Reversión de deterioros, empresas del grupo, asociadas y vinculadas [00317]"/>
-                  <field name="t00455" string="Beneficios, otras empresas [00321]"/>
-                  <field name="t00523" string="Incorporación al activo de gastos financieros [00330]"/>
-                  <field name="t00591" string="RESULTADO ANTES DE IMPUESTOS [00325]"/>
-                  <field name="t00659" string="RESULTADO DE LA CUENTA DE PÉRDIDAS Y GANANCIAS [00500]"/>
-                </group>
+
+            <!-- 9-->
+            <page string="Cuenta de pérdidas y ganancias (I) y (II)"></page>
+            <group>
+              <field name="t00500" string="Resultado de la cuenta de pérdidas y ganancias [00500]" />
+              <field name="t00339"
+                string="Ingresos y gastos imputados al patrimonio neto - Por coberturas de flujos de efectivo [00339]" />
+              <field name="t00343"
+                string="Ingresos y gastos imputados al patrimonio neto - Diferencias de conversión [00343]" />
+              <field name="t00347"
+                string="Transferencias a la cta. pérdidas y ganancias - Activos financieros a valor razonable con cambios en el patrimonio neto [00347]" />
+              <field name="t00351"
+                string="Transferencias a la cta. pérdidas y ganancias - Por activos no corrientes y pasivos vinculados , mantenidos para la venta [00351]" />
+              <field name="t00355"
+                string="Transferencias a la cta. pérdidas y ganancias - TOTAL DE INGRESOS Y GASTOS RECONOCIDOS [00355]" />
+            </group>
+            <group>
+              <field name="t00336"
+                string="Ingresos y gastos imputados al patrimonio neto - Por valoración de instrumentos financieros [00336]" />
+              <field name="t00340"
+                string="Ingresos y gastos imputados al patrimonio neto - Subvenciones, donaciones y legados recibidos [00340]" />
+              <field name="t00344"
+                string="Ingresos y gastos imputados al patrimonio neto - Efecto impositivo [00344]" />
+              <field name="t00348"
+                string="Transferencias a la cta. pérdidas y ganancias - Otros ingresos/gastos [00348]" />
+              <field name="t00352"
+                string="Transferencias a la cta. pérdidas y ganancias - Diferencias de conversión [00352]" />
+            </group>
+            <group>
+              <field name="t00337"
+                string="Ingresos y gastos imputados al patrimonio neto - Activos financieros a valor razonable con cambios en el patrimonio neto [00337]" />
+              <field name="t00341"
+                string="Ingresos y gastos imputados al patrimonio neto - Por ganancias y pérdidas actuariales y otros ajustes [00341]" />
+              <field name="t00345"
+                string="Ingresos y gastos imputados al patrimonio neto - Total ingresos y gastos imputados en el patrimonio neto [00345]" />
+              <field name="t00349"
+                string="Transferencias a la cta. pérdidas y ganancias - Por coberturas de flujos de efectivo [00349]" />
+              <field name="t00353"
+                string="Transferencias a la cta. pérdidas y ganancias - Efecto impositivo [00353]" />
+            </group>
+            <group>
+              <field name="t00338"
+                string="Ingresos y gastos imputados al patrimonio neto - Otros ingresos/gastos [00338]" />
+              <field name="t00342"
+                string="Ingresos y gastos imputados al patrimonio neto - Por activos no corrientes y pasivos vinculados, mantenidos para la venta [00342]" />
+              <field name="t00346"
+                string="Transferencias a la cta. pérdidas y ganancias - Por valoración de instrumentos financieros [00346]" />
+              <field name="t00350"
+                string="Transferencias a la cta. pérdidas y ganancias - Subvenciones, donaciones y legados recibidos [00350]" />
+              <field name="t00354"
+                string="Transferencias a la cta. pérdidas y ganancias - Total transferencia a la cuenta de pérdidas y ganancias [00354]" />
+            </group>
+            <page />
+
+            <!-- p10-->
+            <page string="Estado de cambios patrimonio neto (II)">
+              <group>
+                <field name="t00380"
+                  string="Saldo,  final del ejercicio anterior - Capital - Escriturado [00380]" />
+                <field name="t00384"
+                  string="Saldo,  final del ejercicio anterior - Acciones y participaciones en patrimonio propias  [00384]" />
+                <field name="t00395"
+                  string="Ajustes por cambio de criterio de ejercicios anteriores - Capital - No exigido [00395]" />
+                <field name="t00399"
+                  string="Ajustes por cambio de criterio de ejercicios anteriores - Resultados ejercicios anteriores [00399]" />
+                <field name="t00410"
+                  string="Ajustes por errores de ejercicios anteriores - Prima de emisión [00410]" />
+                <field name="t00414"
+                  string="Ajustes por errores de ejercicios anteriores - Otras aportaciones de socios [00414]" />
+                <field name="t00425"
+                  string="Saldo ajustado, inicio del ejercicio - Reservas [00425]" />
+                <field name="t00436"
+                  string="Total ingresos y gastos reconocidos - Capital - Escriturado [00436]" />
+                <field name="t00440"
+                  string="Total ingresos y gastos reconocidos - Acciones y participaciones en patrimonio propias [00440]" />
+                <field name="t00451"
+                  string="Resultado cuenta pérdidas y ganancias - Capital - No exigido [00451]" />
+                <field name="t00455"
+                  string="Resultado cuenta pérdidas y ganancias - Resultados ejercicios anteriores [00455]" />
+                <field name="t00466"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Prima de emisión [00466]" />
+                <field name="t00470"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Otras aportaciones de socios [00470]" />
+                <field name="t00481"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Ingresos fiscales a distribuir en varios ejercicios - Reservas [00481]" />
+                <field name="t00492"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Otros ingresos y gastos reconocidos en patrimonio neto - Capital - Escriturado [00492]" />
+                <field name="t00496"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Otros ingresos y gastos reconocidos en patrimonio neto - Acciones y participaciones en patrimonio propias  [00496]" />
+                <field name="t00507"
+                  string="Operaciones con socios o propietarios - Capital - No exigido [00507]" />
+                <field name="t00511"
+                  string="Operaciones con socios o propietarios - Resultados ejercicios anteriores [00511]" />
+                <field name="t00522"
+                  string="Operaciones con socios o propietarios - Aumentos de capital - Prima de emisión [00522]" />
+                <field name="t00526"
+                  string="Operaciones con socios o propietarios - Aumentos de capital - Otras aportaciones de socios [00526]" />
+                <field name="t00537"
+                  string="Operaciones con socios o propietarios - (-) Reducciones de capital - Reservas [00537]" />
+                <field name="t00548"
+                  string="Operaciones con socios o propietarios - Conversión de pasivos en patrim. neto - Capital - Escriturado [00548]" />
+                <field name="t00552"
+                  string="Operaciones con socios o propietarios - Conversión de pasivos en patrim. neto - Acciones y participaciones en patrimonio propias [00552]" />
+                <field name="t00563"
+                  string="Operaciones con socios o propietarios - (-) Distribución de dividendos - Capital - No exigido [00563]" />
+                <field name="t00567"
+                  string="Operaciones con socios o propietarios - (-) Distribución de dividendos - Resultados ejercicios anteriores [00567]" />
+                <field name="t00578"
+                  string="Operaciones con socios o propietarios - Operaciones con acciones o participaciones propias - Prima de emisión [00578]" />
+                <field name="t00582"
+                  string="Operaciones con socios o propietarios - Operaciones con acciones o participaciones propias - Otras aportaciones de socios [00582]" />
+                <field name="t00593"
+                  string="Operaciones con socios o propietarios - Incremento (reducción) de patr. neto de combinación de negocios - Reservas [00593]" />
+                <field name="t00604"
+                  string="Operaciones con socios o propietarios - Otras operaciones con socios o propietarios - Capital -  Escriturado [00604]" />
+                <field name="t00608"
+                  string="Operaciones con socios o propietarios - Otras operaciones con socios o propietarios - Acciones y participaciones en patrimonio propias [00608]" />
+                <field name="t00619"
+                  string="Otras variaciones del patrimonio neto - Capital - No exigido [00619]" />
+                <field name="t00623"
+                  string="Otras variaciones del patrimonio neto - Resultados ejercicios anteriores [00623]" />
+                <field name="t00717"
+                  string="Otras variaciones del patrimonio neto - Movimiento reserva revalorización - Prima de emisión [00717]" />
+                <field name="t00721"
+                  string="Otras variaciones del patrimonio neto - Movimiento reserva revalorización - Otras aportaciones de socios [00721]" />
+                <field name="t00732"
+                  string="Otras variaciones del patrimonio neto - Otras variaciones -  Reservas [00732]" />
+                <field name="t00632"
+                  string="SALDO, FINAL DEL EJERCICIO - Capital - Escriturado [00632]" />
+                <field name="t00636"
+                  string="SALDO, FINAL DEL EJERCICIO - Acciones y participaciones en patrimonio propias [00636]" />
+              </group>
+              <group>
+                <field name="t00381"
+                  string="Saldo,  final del ejercicio anterior - Capital - No exigido  [00381]" />
+                <field name="t00385"
+                  string="Saldo,  final del ejercicio anterior - Resultados ejercicios anteriores  [00385]" />
+                <field name="t00396"
+                  string="Ajustes por cambio de criterio de ejercicios anteriores - Prima de emisión [00396]" />
+                <field name="t00400"
+                  string="Ajustes por cambio de criterio de ejercicios anteriores - Otras aportaciones de socios [00400]" />
+                <field name="t00411"
+                  string="Ajustes por errores de ejercicios anteriores - Reservas [00411]" />
+                <field name="t00422"
+                  string="Saldo ajustado, inicio del ejercicio - Capital - Escriturado [00422]" />
+                <field name="t00426"
+                  string="Saldo ajustado, inicio del ejercicio - Acciones y participaciones en patrimonio propias [00426]" />
+                <field name="t00437"
+                  string="Total ingresos y gastos reconocidos - Capital - No exigido [00437]" />
+                <field name="t00441"
+                  string="Total ingresos y gastos reconocidos - Resultados ejercicios anteriores [00441]" />
+                <field name="t00452"
+                  string="Resultado cuenta pérdidas y ganancias - Prima de emisión [00452]" />
+                <field name="t00456"
+                  string="Resultado cuenta pérdidas y ganancias - Otras aportaciones de socios [00456]" />
+                <field name="t00467"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Reservas [00467]" />
+                <field name="t00478"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Ingresos fiscales a distribuir en varios ejercicios - Capital - Escriturado [00478]" />
+                <field name="t00482"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Ingresos fiscales a distribuir en varios ejercicios - Acciones y participaciones en patrimonio propias  [00482]" />
+                <field name="t00493"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Otros ingresos y gastos reconocidos en patrimonio neto - Capital - No exigido [00493]" />
+                <field name="t00497"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Otros ingresos y gastos reconocidos en patrimonio neto - Resultados ejercicios anteriores [00497]" />
+                <field name="t00508"
+                  string="Operaciones con socios o propietarios - Prima de emisión [00508]" />
+                <field name="t00512"
+                  string="Operaciones con socios o propietarios - Otras aportaciones de socios [00512]" />
+                <field name="t00523"
+                  string="Operaciones con socios o propietarios - Aumentos de capital - Reservas [00523]" />
+                <field name="t00534"
+                  string="Operaciones con socios o propietarios - (-) Reducciones de capital - Capital - Escriturado [00534]" />
+                <field name="t00538"
+                  string="Operaciones con socios o propietarios - (-) Reducciones de capital - Acciones y participaciones en patrimonio propias  [00538]" />
+                <field name="t00549"
+                  string="Operaciones con socios o propietarios - Conversión de pasivos en patrim. neto - Capital - No exigido [00549]" />
+                <field name="t00553"
+                  string="Operaciones con socios o propietarios - Conversión de pasivos en patrim. neto - Resultados ejercicios anteriores [00553]" />
+                <field name="t00564"
+                  string="Operaciones con socios o propietarios - (-) Distribución de dividendos - Prima de emisión [00564]" />
+                <field name="t00568"
+                  string="Operaciones con socios o propietarios - (-) Distribución de dividendos - Otras aportaciones de socios [00568]" />
+                <field name="t00579"
+                  string="Operaciones con socios o propietarios - Operaciones con acciones o participaciones propias - Reservas [00579]" />
+                <field name="t00590"
+                  string="Operaciones con socios o propietarios - Incremento (reducción) de patr. neto de combinación de negocios - Capital  - Escriturado [00590]" />
+                <field name="t00594"
+                  string="Operaciones con socios o propietarios - Incremento (reducción) de patr. neto de combinación de negocios - Acciones y participaciones en patrimonio propias [00594]" />
+                <field name="t00605"
+                  string="Operaciones con socios o propietarios - Otras operaciones con socios o propietarios - Capital - No exigido [00605]" />
+                <field name="t00609"
+                  string="Operaciones con socios o propietarios - Otras operaciones con socios o propietarios - Resultados ejercicios anteriores [00609]" />
+                <field name="t00620"
+                  string="Otras variaciones del patrimonio neto - Prima de emisión [00620]" />
+                <field name="t00624"
+                  string="Otras variaciones del patrimonio neto - Otras aportaciones de socios [00624]" />
+                <field name="t00718"
+                  string="Otras variaciones del patrimonio neto - Movimiento reserva revalorización -  Reservas [00718]" />
+                <field name="t00729"
+                  string="Otras variaciones del patrimonio neto - Otras variaciones - Capital - Escriturado [00729]" />
+                <field name="t00733"
+                  string="Otras variaciones del patrimonio neto - Otras variaciones - Acciones y participaciones en patrimonio propias  [00733]" />
+                <field name="t00633"
+                  string="SALDO, FINAL DEL EJERCICIO - Capital - No exigido [00633]" />
+                <field name="t00637"
+                  string="SALDO, FINAL DEL EJERCICIO - Resultados ejercicios 
+anteriores [00637]" />
+              </group>
+              <group>
+                <field name="t00382"
+                  string="Saldo,  final del ejercicio anterior - Prima de emisión  [00382]" />
+                <field name="t00386"
+                  string="Saldo,  final del ejercicio anterior - Otras aportaciones de socios  [00386]" />
+                <field name="t00397"
+                  string="Ajustes por cambio de criterio de ejercicios anteriores - Reservas [00397]" />
+                <field name="t00408"
+                  string="Ajustes por errores de ejercicios anteriores - Capital - Escriturado [00408]" />
+                <field name="t00412"
+                  string="Ajustes por errores de ejercicios anteriores - Acciones y participaciones en patrimonio propias [00412]" />
+                <field name="t00423"
+                  string="Saldo ajustado, inicio del ejercicio - Capital - No exigido [00423]" />
+                <field name="t00427"
+                  string="Saldo ajustado, inicio del ejercicio - Resultados ejercicios anteriores [00427]" />
+                <field name="t00438"
+                  string="Total ingresos y gastos reconocidos - Prima de emisión [00438]" />
+                <field name="t00442"
+                  string="Total ingresos y gastos reconocidos - Otras aportaciones de socios [00442]" />
+                <field name="t00453"
+                  string="Resultado cuenta pérdidas y ganancias - Reservas [00453]" />
+                <field name="t00464"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Capital - Escriturado [00464]" />
+                <field name="t00468"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Acciones y participaciones en patrimonio propias [00468]" />
+                <field name="t00479"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Ingresos fiscales a distribuir en varios ejercicios - Capital - No exigido [00479]" />
+                <field name="t00483"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Ingresos fiscales a distribuir en varios ejercicios - Resultados ejercicios anteriores [00483]" />
+                <field name="t00494"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Otros ingresos y gastos reconocidos en patrimonio neto - Prima de emisión [00494]" />
+                <field name="t00498"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Otros ingresos y gastos reconocidos en patrimonio neto - Otras aportaciones de socios [00498]" />
+                <field name="t00509"
+                  string="Operaciones con socios o propietarios - Reservas [00509]" />
+                <field name="t00520"
+                  string="Operaciones con socios o propietarios - Aumentos de capital - Capital - Escriturado [00520]" />
+                <field name="t00524"
+                  string="Operaciones con socios o propietarios - Aumentos de capital - Acciones y participaciones en patrimonio propias  [00524]" />
+                <field name="t00535"
+                  string="Operaciones con socios o propietarios - (-) Reducciones de capital - Capital - No exigido [00535]" />
+                <field name="t00539"
+                  string="Operaciones con socios o propietarios - (-) Reducciones de capital - Resultados ejercicios anteriores [00539]" />
+                <field name="t00550"
+                  string="Operaciones con socios o propietarios - Conversión de pasivos en patrim. neto - Prima de emisión [00550]" />
+                <field name="t00554"
+                  string="Operaciones con socios o propietarios - Conversión de pasivos en patrim. neto - Otras aportaciones de socios [00554]" />
+                <field name="t00565"
+                  string="Operaciones con socios o propietarios - (-) Distribución de dividendos - Reservas [00565]" />
+                <field name="t00576"
+                  string="Operaciones con socios o propietarios - Operaciones con acciones o participaciones propias - Capital - Escriturado [00576]" />
+                <field name="t00580"
+                  string="Operaciones con socios o propietarios - Operaciones con acciones o participaciones propias - Acciones y participaciones en patrimonio propias [00580]" />
+                <field name="t00591"
+                  string="Operaciones con socios o propietarios - Incremento (reducción) de patr. neto de combinación de negocios - Capital  - No exigido [00591]" />
+                <field name="t00595"
+                  string="Operaciones con socios o propietarios - Incremento (reducción) de patr. neto de combinación de negocios - Resultados ejercicios anteriores [00595]" />
+                <field name="t00606"
+                  string="Operaciones con socios o propietarios - Otras operaciones con socios o propietarios - Prima de emisión [00606]" />
+                <field name="t00610"
+                  string="Operaciones con socios o propietarios - Otras operaciones con socios o propietarios - Otras aportaciones de socios [00610]" />
+                <field name="t00621"
+                  string="Otras variaciones del patrimonio neto - Reservas [00621]" />
+                <field name="t00715"
+                  string="Otras variaciones del patrimonio neto - Movimiento reserva revalorización - Capital - Escriturado [00715]" />
+                <field name="t00719"
+                  string="Otras variaciones del patrimonio neto - Movimiento reserva revalorización - Acciones y participaciones en patrimonio propias [00719]" />
+                <field name="t00730"
+                  string="Otras variaciones del patrimonio neto - Otras variaciones -  Capital - No exigido [00730]" />
+                <field name="t00734"
+                  string="Otras variaciones del patrimonio neto - Otras variaciones - Resultados ejercicios anteriores [00734]" />
+                <field name="t00634" string="SALDO, FINAL DEL EJERCICIO - Prima de emisión [00634]" />
+                <field name="t00638"
+                  string="SALDO, FINAL DEL EJERCICIO - Otras aportaciones de socios [00638]" />
+              </group>
+              <group>
+                <field name="t00383"
+                  string="Saldo,  final del ejercicio anterior - Reservas  [00383]" />
+                <field name="t00394"
+                  string="Ajustes por cambio de criterio de ejercicios anteriores - Capital - Escriturado  [00394]" />
+                <field name="t00398"
+                  string="Ajustes por cambio de criterio de ejercicios anteriores - Acciones y participaciones en patrimonio propias [00398]" />
+                <field name="t00409"
+                  string="Ajustes por errores de ejercicios anteriores - Capital - No exigido [00409]" />
+                <field name="t00413"
+                  string="Ajustes por errores de ejercicios anteriores - Resultados ejercicios anteriores [00413]" />
+                <field name="t00424"
+                  string="Saldo ajustado, inicio del ejercicio - Prima de emisión [00424]" />
+                <field name="t00428"
+                  string="Saldo ajustado, inicio del ejercicio - Otras aportaciones socios [00428]" />
+                <field name="t00439" string="Total ingresos y gastos reconocidos - Reservas [00439]" />
+                <field name="t00450"
+                  string="Resultado cuenta pérdidas y ganancias - Capital - Escriturado [00450]" />
+                <field name="t00454"
+                  string="Resultado cuenta pérdidas y ganancias - Acciones y participaciones en patrimonio propias [00454]" />
+                <field name="t00465"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Capital - No exigido [00465]" />
+                <field name="t00469"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Resultados ejercicios anteriores [00469]" />
+                <field name="t00480"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Ingresos fiscales a distribuir en varios ejercicios - Prima de emisión [00480]" />
+                <field name="t00484"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Ingresos fiscales a distribuir en varios ejercicios - Otras aportaciones de socios [00484]" />
+                <field name="t00495"
+                  string="Ingresos y gastos reconocidos en patrimonio neto - Otros ingresos y gastos reconocidos en patrimonio neto - Reservas [00495]" />
+                <field name="t00506"
+                  string="Operaciones con socios o propietarios - Capital - Escriturado [00506]" />
+                <field name="t00510"
+                  string="Operaciones con socios o propietarios - Acciones y participaciones en patrimonio propias [00510]" />
+                <field name="t00521"
+                  string="Operaciones con socios o propietarios - Aumentos de capital - Capital - No exigido [00521]" />
+                <field name="t00525"
+                  string="Operaciones con socios o propietarios - Aumentos de capital - Resultados ejercicios anteriores [00525]" />
+                <field name="t00536"
+                  string="Operaciones con socios o propietarios - (-) Reducciones de capital - Prima de emisión [00536]" />
+                <field name="t00540"
+                  string="Operaciones con socios o propietarios - (-) Reducciones de capital - Otras aportaciones de socios [00540]" />
+                <field name="t00551"
+                  string="Operaciones con socios o propietarios - Conversión de pasivos en patrim. neto - Reservas [00551]" />
+                <field name="t00562"
+                  string="Operaciones con socios o propietarios - (-) Distribución de dividendos - Capital - Escriturado [00562]" />
+                <field name="t00566"
+                  string="Operaciones con socios o propietarios - (-) Distribución de dividendos - Acciones y participaciones en patrimonio propias  [00566]" />
+                <field name="t00577"
+                  string="Operaciones con socios o propietarios - Operaciones con acciones o participaciones propias - Capital - No exigido [00577]" />
+                <field name="t00581"
+                  string="Operaciones con socios o propietarios - Operaciones con acciones o participaciones propias - Resultados ejercicios anteriores [00581]" />
+                <field name="t00592"
+                  string="Operaciones con socios o propietarios - Incremento (reducción) de patr. neto de combinación de negocios - Prima de emisión [00592]" />
+                <field name="t00596"
+                  string="Operaciones con socios o propietarios - Incremento (reducción) de patr. neto de combinación de negocios - Otras aportaciones de socios [00596]" />
+                <field name="t00607"
+                  string="Operaciones con socios o propietarios - Otras operaciones con socios o propietarios - Reservas [00607]" />
+                <field name="t00618"
+                  string="Otras variaciones del patrimonio neto - Capital - Escriturado [00618]" />
+                <field name="t00622"
+                  string="Otras variaciones del patrimonio neto - Acciones y participaciones en patrimonio propias [00622]" />
+                <field name="t00716"
+                  string="Otras variaciones del patrimonio neto - Movimiento reserva revalorización -  Capital - No exigido [00716]" />
+                <field name="t00720"
+                  string="Otras variaciones del patrimonio neto - Movimiento reserva revalorización - Resultados ejercicios anteriores [00720]" />
+                <field name="t00731"
+                  string="Otras variaciones del patrimonio neto - Otras variaciones - Prima de emisión [00731]" />
+                <field name="t00735"
+                  string="Otras variaciones del patrimonio neto - Otras variaciones - Otras aportaciones de socios [00735]" />
+                <field name="t00635" string="SALDO, FINAL DEL EJERCICIO - Reservas [00635]" />
               </group>
             </page>
-            <page string="Estado de cambios patrimonio neto (I)">
-              <group col="3">
-                <group>
-                  <field name="t00001" string="Inicio del identificador de modelo y página."/>
-                  <field name="t00011" string="Fin de identificador de modelo."/>
-                  <field name="t00030" string="Por valoración de instrumentos financieros [00336]"/>
-                  <field name="t00081" string="Por coberturas de flujos de efectivo [00339]"/>
-                  <field name="t00132" string="Por activos no corrientes y pasivos vinculados, mantenidos para la venta [00342]"/>
-                  <field name="t00183" string="Total ingresos y gastos imputados en el patrimonio neto [00345]"/>
-                  <field name="t00234" string="Otros ingresos/gastos [00348]"/>
-                  <field name="t00285" string="Por activos no corrientes y pasivos vinculados , mantenidos para la venta [00351]"/>
-                  <field name="t00336" string="Total transferencia a la cuenta de pérdidas y ganancias [00354]"/>
-                  <field name="t00570" string="Identificador de fin de registro"/>
-                </group>
-                <group>
-                  <field name="t00003" string="Modelo."/>
-                  <field name="t00012" string="Indicador de página complementaria."/>
-                  <field name="t00047" string="Activos financieros a valor razonable con cambios en el patrimonio neto [00337]"/>
-                  <field name="t00098" string="Subvenciones, donaciones y legados recibidos [00340]"/>
-                  <field name="t00149" string="Diferencias de conversión [00343]"/>
-                  <field name="t00200" string="Por valoración de instrumentos financieros [00346]"/>
-                  <field name="t00251" string="Por coberturas de flujos de efectivo [00349]"/>
-                  <field name="t00302" string="Diferencias de conversión [00352]"/>
-                  <field name="t00353" string="TOTAL DE INGRESOS Y GASTOS RECONOCIDOS [00355]"/>
-                </group>
-                <group>
-                  <field name="t00006" string="Página." invisible="1" nolabel="1" default="9"/>
-                  <field name="t00013" string="Resultado de la cuenta de pérdidas y ganancias [00500]"/>
-                  <field name="t00064" string="Otros ingresos/gastos [00338]"/>
-                  <field name="t00115" string="Por ganancias y pérdidas actuariales y otros ajustes [00341]"/>
-                  <field name="t00166" string="Efecto impositivo [00344]"/>
-                  <field name="t00217" string="Activos financieros a valor razonable con cambios en el patrimonio neto [00347]"/>
-                  <field name="t00268" string="Subvenciones, donaciones y legados recibidos [00350]"/>
-                  <field name="t00319" string="Efecto impositivo [00353]"/>
-                  <field name="t00370" string="RESERVADO PARA LA AEAT"/>
-                </group>
-              </group>
-            </page>
-            <page string="DP200010 - Estado cambios patrimonio neto (II)">
-  <group col="3">
-    <group>
-        <field name="t00001" string="Inicio del identificador de modelo y página. [00001]"/>
-        <field name="t00003" string="Modelo. [00003]"/>
-        <field name="t00006" string="Página. [00006]" invisible="1" nolabel="1" default="10"/>
-        <field name="t00011" string="Fin de identificador de modelo. [00011]"/>
-        <field name="t00012" string="Indicador de página complementaria. [00012]"/>
-        <field name="t00013" string="Saldo,  final del ejercicio anterior - Capital - Escriturado [00380]"/>
-        <field name="t00030" string="Saldo,  final del ejercicio anterior - Capital - No exigido [00381]"/>
-        <field name="t00047" string="Saldo,  final del ejercicio anterior - Prima de emisión [00382]"/>
-        <field name="t00064" string="Saldo,  final del ejercicio anterior - Reservas [00383]"/>
-        <field name="t00081" string="Saldo,  final del ejercicio anterior - Acciones y participaciones en patrimonio propias [00384]"/>
-        <field name="t00098" string="Saldo,  final del ejercicio anterior - Resultados ejercicios anteriores [00385]"/>
-        <field name="t00115" string="Saldo,  final del ejercicio anterior - Otras aportaciones de socios [00386]"/>
-        <field name="t00132" string="Ajustes por cambio de criterio de ejercicios anteriores - Capital - Escriturado [00394]"/>
-        <field name="t00149" string="Ajustes por cambio de criterio de ejercicios anteriores - Capital - No exigido [00395]"/>
-        <field name="t00166" string="Ajustes por cambio de criterio de ejercicios anteriores - Prima de emisión [00396]"/>
-        <field name="t00183" string="Ajustes por cambio de criterio de ejercicios anteriores - Reservas [00397]"/>
-        <field name="t00200" string="Ajustes por cambio de criterio de ejercicios anteriores - Acciones y participaciones en patrimonio propias [00398]"/>
-        <field name="t00217" string="Ajustes por cambio de criterio de ejercicios anteriores - Resultados ejercicios anteriores [00399]"/>
-        <field name="t00234" string="Ajustes por cambio de criterio de ejercicios anteriores - Otras aportaciones de socios [00400]"/>
-        <field name="t00251" string="Ajustes por errores de ejercicios anteriores - Capital - Escriturado [00408]"/>
-        <field name="t00268" string="Ajustes por errores de ejercicios anteriores - Capital - No exigido [00409]"/>
-        <field name="t00285" string="Ajustes por errores de ejercicios anteriores - Prima de emisión [00410]"/>
-        <field name="t00302" string="Ajustes por errores de ejercicios anteriores - Reservas [00411]"/>
-        <field name="t00319" string="Ajustes por errores de ejercicios anteriores - Acciones y participaciones en patrimonio propias [00412]"/>
-        <field name="t00336" string="Ajustes por errores de ejercicios anteriores - Resultados ejercicios anteriores [00413]"/>
-        <field name="t00353" string="Ajustes por errores de ejercicios anteriores - Otras aportaciones de socios [00414]"/>
-        <field name="t00370" string="Saldo ajustado, inicio del ejercicio - Capital - Escriturado [00422]"/>
-        <field name="t00387" string="Saldo ajustado, inicio del ejercicio - Capital - No exigido [00423]"/>
-        <field name="t00404" string="Saldo ajustado, inicio del ejercicio - Prima de emisión [00424]"/>
-        <field name="t00421" string="Saldo ajustado, inicio del ejercicio - Reservas [00425]"/>
-        <field name="t00438" string="Saldo ajustado, inicio del ejercicio - Acciones y participaciones en patrimonio propias [00426]"/>
-        <field name="t00455" string="Saldo ajustado, inicio del ejercicio - Resultados ejercicios anteriores [00427]"/>
-        <field name="t00472" string="Saldo ajustado, inicio del ejercicio - Otras aportaciones socios [00428]"/>
-        <field name="t00489" string="Total ingresos y gastos reconocidos - Capital - Escriturado [00436]"/>
-        <field name="t00506" string="Total ingresos y gastos reconocidos - Capital - No exigido [00437]"/>
-        <field name="t00523" string="Total ingresos y gastos reconocidos - Prima de emisión [00438]"/>
-        <field name="t00540" string="Total ingresos y gastos reconocidos - Reservas [00439]"/>
-        <field name="t00557" string="Total ingresos y gastos reconocidos - Acciones y participaciones en patrimonio propias [00440]"/>
-        <field name="t00574" string="Total ingresos y gastos reconocidos - Resultados ejercicios anteriores [00441]"/>
-        <field name="t00591" string="Total ingresos y gastos reconocidos - Otras aportaciones de socios [00442]"/>
-        <field name="t00608" string="Resultado cuenta pérdidas y ganancias - Capital - Escriturado [00450]"/>
-        <field name="t00625" string="Resultado cuenta pérdidas y ganancias - Capital - No exigido [00451]"/>
-        <field name="t00642" string="Resultado cuenta pérdidas y ganancias - Prima de emisión [00452]"/>
-        <field name="t00659" string="Resultado cuenta pérdidas y ganancias - Reservas [00453]"/>
-        <field name="t00676" string="Resultado cuenta pérdidas y ganancias - Acciones y participaciones en patrimonio propias [00454]"/>
-        <field name="t00693" string="Resultado cuenta pérdidas y ganancias - Resultados ejercicios anteriores [00455]"/>
-        <field name="t00710" string="Resultado cuenta pérdidas y ganancias - Otras aportaciones de socios [00456]"/>
-        <field name="t00727" string="Ingresos y gastos reconocidos en patrimonio neto - Capital - Escriturado [00464]"/>
-        <field name="t00744" string="Ingresos y gastos reconocidos en patrimonio neto - Capital - No exigido [00465]"/>
-        <field name="t00761" string="Ingresos y gastos reconocidos en patrimonio neto - Prima de emisión [00466]"/>
-        <field name="t00778" string="Ingresos y gastos reconocidos en patrimonio neto - Reservas [00467]"/>
-        <field name="t00795" string="Ingresos y gastos reconocidos en patrimonio neto - Acciones y participaciones en patrimonio propias [00468]"/>
-    </group>
-    <group>
-        <field name="t00812" string="Ingresos y gastos reconocidos en patrimonio neto - Resultados ejercicios anteriores [00469]"/>
-        <field name="t00829" string="Ingresos y gastos reconocidos en patrimonio neto - Otras aportaciones de socios [00470]"/>
-        <field name="t00846" string="Ingresos y gastos reconocidos en patrimonio neto - Ingresos fiscales a distribuir en varios ejercicios - Capital - Escriturado [00478]"/>
-        <field name="t00863" string="Ingresos y gastos reconocidos en patrimonio neto - Ingresos fiscales a distribuir en varios ejercicios - Capital - No exigido [00479]"/>
-        <field name="t00880" string="Ingresos y gastos reconocidos en patrimonio neto - Ingresos fiscales a distribuir en varios ejercicios - Prima de emisión [00480]"/>
-        <field name="t00897" string="Ingresos y gastos reconocidos en patrimonio neto - Ingresos fiscales a distribuir en varios ejercicios - Reservas [00481]"/>
-        <field name="t00914" string="Ingresos y gastos reconocidos en patrimonio neto - Ingresos fiscales a distribuir en varios ejercicios - Acciones y participaciones en patrimonio propias [00482]"/>
-        <field name="t00931" string="Ingresos y gastos reconocidos en patrimonio neto - Ingresos fiscales a distribuir en varios ejercicios - Resultados ejercicios anteriores [00483]"/>
-        <field name="t00948" string="Ingresos y gastos reconocidos en patrimonio neto - Ingresos fiscales a distribuir en varios ejercicios - Otras aportaciones de socios [00484]"/>
-        <field name="t00965" string="Ingresos y gastos reconocidos en patrimonio neto - Otros ingresos y gastos reconocidos en patrimonio neto - Capital - Escriturado [00492]"/>
-        <field name="t00982" string="Ingresos y gastos reconocidos en patrimonio neto - Otros ingresos y gastos reconocidos en patrimonio neto - Capital - No exigido [00493]"/>
-        <field name="t00999" string="Ingresos y gastos reconocidos en patrimonio neto - Otros ingresos y gastos reconocidos en patrimonio neto - Prima de emisión [00494]"/>
-        <field name="t01016" string="Ingresos y gastos reconocidos en patrimonio neto - Otros ingresos y gastos reconocidos en patrimonio neto - Reservas [00495]"/>
-        <field name="t01033" string="Ingresos y gastos reconocidos en patrimonio neto - Otros ingresos y gastos reconocidos en patrimonio neto - Acciones y participaciones en patrimonio propias [00496]"/>
-        <field name="t01050" string="Ingresos y gastos reconocidos en patrimonio neto - Otros ingresos y gastos reconocidos en patrimonio neto - Resultados ejercicios anteriores [00497]"/>
-        <field name="t01067" string="Ingresos y gastos reconocidos en patrimonio neto - Otros ingresos y gastos reconocidos en patrimonio neto - Otras aportaciones de socios [00498]"/>
-        <field name="t01084" string="Operaciones con socios o propietarios - Capital - Escriturado [00506]"/>
-        <field name="t01101" string="Operaciones con socios o propietarios - Capital - No exigido [00507]"/>
-        <field name="t01118" string="Operaciones con socios o propietarios - Prima de emisión [00508]"/>
-        <field name="t01135" string="Operaciones con socios o propietarios - Reservas [00509]"/>
-        <field name="t01152" string="Operaciones con socios o propietarios - Acciones y participaciones en patrimonio propias [00510]"/>
-        <field name="t01169" string="Operaciones con socios o propietarios - Resultados ejercicios anteriores [00511]"/>
-        <field name="t01186" string="Operaciones con socios o propietarios - Otras aportaciones de socios [00512]"/>
-        <field name="t01203" string="Operaciones con socios o propietarios - Aumentos de capital - Capital - Escriturado [00520]"/>
-        <field name="t01220" string="Operaciones con socios o propietarios - Aumentos de capital - Capital - No exigido [00521]"/>
-        <field name="t01237" string="Operaciones con socios o propietarios - Aumentos de capital - Prima de emisión [00522]"/>
-        <field name="t01254" string="Operaciones con socios o propietarios - Aumentos de capital - Reservas [00523]"/>
-        <field name="t01271" string="Operaciones con socios o propietarios - Aumentos de capital - Acciones y participaciones en patrimonio propias [00524]"/>
-        <field name="t01288" string="Operaciones con socios o propietarios - Aumentos de capital - Resultados ejercicios anteriores [00525]"/>
-        <field name="t01305" string="Operaciones con socios o propietarios - Aumentos de capital - Otras aportaciones de socios [00526]"/>
-        <field name="t01322" string="Operaciones con socios o propietarios - (-) Reducciones de capital - Capital - Escriturado [00534]"/>
-        <field name="t01339" string="Operaciones con socios o propietarios - (-) Reducciones de capital - Capital - No exigido [00535]"/>
-        <field name="t01356" string="Operaciones con socios o propietarios - (-) Reducciones de capital - Prima de emisión [00536]"/>
-        <field name="t01373" string="Operaciones con socios o propietarios - (-) Reducciones de capital - Reservas [00537]"/>
-        <field name="t01390" string="Operaciones con socios o propietarios - (-) Reducciones de capital - Acciones y participaciones en patrimonio propias [00538]"/>
-        <field name="t01407" string="Operaciones con socios o propietarios - (-) Reducciones de capital - Resultados ejercicios anteriores [00539]"/>
-        <field name="t01424" string="Operaciones con socios o propietarios - (-) Reducciones de capital - Otras aportaciones de socios [00540]"/>
-        <field name="t01441" string="Operaciones con socios o propietarios - Conversión de pasivos en patrim. neto - Capital - Escriturado [00548]"/>
-        <field name="t01458" string="Operaciones con socios o propietarios - Conversión de pasivos en patrim. neto - Capital - No exigido [00549]"/>
-        <field name="t01475" string="Operaciones con socios o propietarios - Conversión de pasivos en patrim. neto - Prima de emisión [00550]"/>
-        <field name="t01492" string="Operaciones con socios o propietarios - Conversión de pasivos en patrim. neto - Reservas [00551]"/>
-        <field name="t01509" string="Operaciones con socios o propietarios - Conversión de pasivos en patrim. neto - Acciones y participaciones en patrimonio propias [00552]"/>
-        <field name="t01526" string="Operaciones con socios o propietarios - Conversión de pasivos en patrim. neto - Resultados ejercicios anteriores [00553]"/>
-        <field name="t01543" string="Operaciones con socios o propietarios - Conversión de pasivos en patrim. neto - Otras aportaciones de socios [00554]"/>
-        <field name="t01560" string="Operaciones con socios o propietarios - (-) Distribución de dividendos - Capital - Escriturado [00562]"/>
-        <field name="t01577" string="Operaciones con socios o propietarios - (-) Distribución de dividendos - Capital - No exigido [00563]"/>
-        <field name="t01594" string="Operaciones con socios o propietarios - (-) Distribución de dividendos - Prima de emisión [00564]"/>
-        <field name="t01611" string="Operaciones con socios o propietarios - (-) Distribución de dividendos - Reservas [00565]"/>
-        <field name="t01628" string="Operaciones con socios o propietarios - (-) Distribución de dividendos - Acciones y participaciones en patrimonio propias [00566]"/>
-        <field name="t01645" string="Operaciones con socios o propietarios - (-) Distribución de dividendos - Resultados ejercicios anteriores [00567]"/>
-        <field name="t01662" string="Operaciones con socios o propietarios - (-) Distribución de dividendos - Otras aportaciones de socios [00568]"/>
-        <field name="t01679" string="Operaciones con socios o propietarios - Operaciones con acciones o participaciones propias - Capital - Escriturado [00576]"/>
-    </group>
-    <group>
-        <field name="t01696" string="Operaciones con socios o propietarios - Operaciones con acciones o participaciones propias - Capital - No exigido [00577]"/>
-        <field name="t01713" string="Operaciones con socios o propietarios - Operaciones con acciones o participaciones propias - Prima de emisión [00578]"/>
-        <field name="t01730" string="Operaciones con socios o propietarios - Operaciones con acciones o participaciones propias - Reservas [00579]"/>
-        <field name="t01747" string="Operaciones con socios o propietarios - Operaciones con acciones o participaciones propias - Acciones y participaciones en patrimonio propias [00580]"/>
-        <field name="t01764" string="Operaciones con socios o propietarios - Operaciones con acciones o participaciones propias - Resultados ejercicios anteriores [00581]"/>
-        <field name="t01781" string="Operaciones con socios o propietarios - Operaciones con acciones o participaciones propias - Otras aportaciones de socios [00582]"/>
-        <field name="t01798" string="Operaciones con socios o propietarios - Incremento (reducción) de patr. neto de combinación de negocios - Capital  - Escriturado [00590]"/>
-        <field name="t01815" string="Operaciones con socios o propietarios - Incremento (reducción) de patr. neto de combinación de negocios - Capital  - No exigido [00591]"/>
-        <field name="t01832" string="Operaciones con socios o propietarios - Incremento (reducción) de patr. neto de combinación de negocios - Prima de emisión [00592]"/>
-        <field name="t01849" string="Operaciones con socios o propietarios - Incremento (reducción) de patr. neto de combinación de negocios - Reservas [00593]"/>
-        <field name="t01866" string="Operaciones con socios o propietarios - Incremento (reducción) de patr. neto de combinación de negocios - Acciones y participaciones en patrimonio propias [00594]"/>
-        <field name="t01883" string="Operaciones con socios o propietarios - Incremento (reducción) de patr. neto de combinación de negocios - Resultados ejercicios anteriores [00595]"/>
-        <field name="t01900" string="Operaciones con socios o propietarios - Incremento (reducción) de patr. neto de combinación de negocios - Otras aportaciones de socios [00596]"/>
-        <field name="t01917" string="Operaciones con socios o propietarios - Otras operaciones con socios o propietarios - Capital -  Escriturado [00604]"/>
-        <field name="t01934" string="Operaciones con socios o propietarios - Otras operaciones con socios o propietarios - Capital - No exigido [00605]"/>
-        <field name="t01951" string="Operaciones con socios o propietarios - Otras operaciones con socios o propietarios - Prima de emisión [00606]"/>
-        <field name="t01968" string="Operaciones con socios o propietarios - Otras operaciones con socios o propietarios - Reservas [00607]"/>
-        <field name="t01985" string="Operaciones con socios o propietarios - Otras operaciones con socios o propietarios - Acciones y participaciones en patrimonio propias [00608]"/>
-        <field name="t02002" string="Operaciones con socios o propietarios - Otras operaciones con socios o propietarios - Resultados ejercicios anteriores [00609]"/>
-        <field name="t02019" string="Operaciones con socios o propietarios - Otras operaciones con socios o propietarios - Otras aportaciones de socios [00610]"/>
-        <field name="t02036" string="Otras variaciones del patrimonio neto - Capital - Escriturado [00618]"/>
-        <field name="t02053" string="Otras variaciones del patrimonio neto - Capital - No exigido [00619]"/>
-        <field name="t02070" string="Otras variaciones del patrimonio neto - Prima de emisión [00620]"/>
-        <field name="t02087" string="Otras variaciones del patrimonio neto - Reservas [00621]"/>
-        <field name="t02104" string="Otras variaciones del patrimonio neto - Acciones y participaciones en patrimonio propias [00622]"/>
-        <field name="t02121" string="Otras variaciones del patrimonio neto - Resultados ejercicios anteriores [00623]"/>
-        <field name="t02138" string="Otras variaciones del patrimonio neto - Otras aportaciones de socios [00624]"/>
-        <field name="t02155" string="Otras variaciones del patrimonio neto - Movimiento reserva revalorización - Capital - Escriturado [00715]"/>
-        <field name="t02172" string="Otras variaciones del patrimonio neto - Movimiento reserva revalorización -  Capital - No exigido [00716]"/>
-        <field name="t02189" string="Otras variaciones del patrimonio neto - Movimiento reserva revalorización - Prima de emisión [00717]"/>
-        <field name="t02206" string="Otras variaciones del patrimonio neto - Movimiento reserva revalorización -  Reservas [00718]"/>
-        <field name="t02223" string="Otras variaciones del patrimonio neto - Movimiento reserva revalorización - Acciones y participaciones en patrimonio propias [00719]"/>
-        <field name="t02240" string="Otras variaciones del patrimonio neto - Movimiento reserva revalorización - Resultados ejercicios anteriores [00720]"/>
-        <field name="t02257" string="Otras variaciones del patrimonio neto - Movimiento reserva revalorización - Otras aportaciones de socios [00721]"/>
-        <field name="t02274" string="Otras variaciones del patrimonio neto - Otras variaciones - Capital - Escriturado [00729]"/>
-        <field name="t02291" string="Otras variaciones del patrimonio neto - Otras variaciones -  Capital - No exigido [00730]"/>
-        <field name="t02308" string="Otras variaciones del patrimonio neto - Otras variaciones - Prima de emisión [00731]"/>
-        <field name="t02325" string="Otras variaciones del patrimonio neto - Otras variaciones -  Reservas [00732]"/>
-        <field name="t02342" string="Otras variaciones del patrimonio neto - Otras variaciones - Acciones y participaciones en patrimonio propias [00733]"/>
-        <field name="t02359" string="Otras variaciones del patrimonio neto - Otras variaciones - Resultados ejercicios anteriores [00734]"/>
-        <field name="t02376" string="Otras variaciones del patrimonio neto - Otras variaciones - Otras aportaciones de socios [00735]"/>
-        <field name="t02393" string="SALDO, FINAL DEL EJERCICIO - Capital - Escriturado [00632]"/>
-        <field name="t02410" string="SALDO, FINAL DEL EJERCICIO - Capital - No exigido [00633]"/>
-        <field name="t02427" string="SALDO, FINAL DEL EJERCICIO - Prima de emisión [00634]"/>
-        <field name="t02444" string="SALDO, FINAL DEL EJERCICIO - Reservas [00635]"/>
-        <field name="t02461" string="SALDO, FINAL DEL EJERCICIO - Acciones y participaciones en patrimonio propias [00636]"/>
-        <field name="t02478" string="SALDO, FINAL DEL EJERCICIO - Resultados ejercicios  anteriores [00637]"/>
-        <field name="t02495" string="SALDO, FINAL DEL EJERCICIO - Otras aportaciones de socios [00638]"/>
-        <field name="t02512" string="RESERVADO PARA LA AEAT [02512]"/>
-        <field name="t02712" string="Identificador de fin de registro [02712]"/>
-    </group>
-  </group>
-</page>
+
+
+            <!--  -->
+
           </notebook>
           <div class="oe_chatter">
-            <field name="message_follower_ids" widget="mail_followers"/>
-            <field name="activity_ids" widget="mail_activity"/>
-            <field name="message_ids" widget="mail_thread"/>
+            <field name="message_follower_ids" widget="mail_followers" />
+            <field name="activity_ids" widget="mail_activity" />
+            <field name="message_ids" widget="mail_thread" />
           </div>
         </sheet>
       </form>
@@ -623,9 +874,9 @@
     <field name="model">modelo200.declaration</field>
     <field name="arch" type="xml">
       <tree string="Declaraciones Modelo 200">
-        <field name="company_id"/>
-        <field name="fiscal_year"/>
-        <field name="state"/>
+        <field name="company_id" />
+        <field name="fiscal_year" />
+        <field name="state" />
       </tree>
     </field>
   </record>
@@ -634,6 +885,8 @@
     <field name="res_model">modelo200.declaration</field>
     <field name="view_mode">tree,form</field>
   </record>
-  <menuitem id="menu_modelo200_root" name="Modelo 200" parent="account.menu_finance" sequence="50"/>
-  <menuitem id="menu_modelo200_declaration" name="Declaraciones" parent="menu_modelo200_root" action="action_modelo200_declaration"/>
+  <menuitem id="menu_modelo200_root" name="Modelo 200" parent="account.menu_finance"
+    sequence="50" />
+  <menuitem id="menu_modelo200_declaration" name="Declaraciones" parent="menu_modelo200_root"
+    action="action_modelo200_declaration" />
 </odoo>
