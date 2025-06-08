@@ -1,29 +1,517 @@
 from odoo import models, fields, api
 import base64
+import random
 from datetime import date
 
-# Extensión del modelo res.company para incluir datos del administrador de la sociedad
-class ResCompany(models.Model):
-    _inherit = 'res.company'
-
-    admin_name = fields.Char(string="Administrador - Nombre")
-    admin_nif = fields.Char(string="Administrador - NIF")
-    admin_position = fields.Char(string="Administrador - Cargo")
 
 # Modelo principal para generar la declaración Modelo 200 y almacenar sus datos contables y fiscales
 class Modelo200Declaration(models.Model):
+    
+    xml_file = fields.Binary("Archivo XML", readonly=True)
+    xml_filename = fields.Char("Nombre del archivo XML")
+
+    def action_generate_xml(self):
+        self.ensure_one()
+        root = ET.Element("Modelo200")
+
+        # Añadir datos de la empresa antes del resto del XML
+        info_empresa = ET.SubElement(root, "InformacionEmpresa")
+        ET.SubElement(info_empresa, "NombreEmpresa").text = self.t00011 or ''
+        ET.SubElement(info_empresa, "CIFEmpresa").text = self.t00006 or ''
+
+        # Continuar con la estructura estándar
+        for tipo_pagina, campos in estructura_xml_fija.items():
+            nodo_pagina = ET.SubElement(root, tipo_pagina)
+            for etiqueta in campos:
+                campo_odoo = "t" + etiqueta[1:]
+                valor = getattr(self, campo_odoo, '')
+                if valor in [False, None]:
+                    valor = ''
+                nodo = ET.SubElement(nodo_pagina, etiqueta)
+                nodo.text = str(valor)
+                _logger.info(f"Campo {campo_odoo}: {valor}")
+
+        xml_bytes = ET.tostring(root, encoding="utf-8", method="xml")
+        self.xml_file = base64.b64encode(xml_bytes)
+        self.xml_filename = "modelo200.xml"
+
+        return {
+            "type": "ir.actions.act_url",
+            "url": f"/web/content?model={self._name}&id={self.id}&field=xml_file&download=true&filename={self.xml_filename}",
+            "target": "self",
+        }
+
+        
     cnae = fields.Char(string="CNAE")
     _inherit = ['mail.thread', 'mail.activity.mixin']
     # Campos faltantes detectados por comparación con XML
-    t00001 = fields.Char(string="Inicio del identificador de modelo y página. Constante")
+    t00001 = fields.Char(
+    string="Inicio del identificador de modelo. Constante",
+    default='T200'
+    
+    )
+    
+   
+
+#------------ moneda
+    
+    currency_id = fields.Many2one(
+    'res.currency',
+    string='Moneda',
+    default=lambda self: self.env.company.currency_id.id,
+    readonly=True
+)
+#----------------
+
+#t00180
+
+#-----Importar datos Administrador desde res.company---------
+    company_id = fields.Many2one('res.company', string='Compañía', required=True, default=lambda self: self.env.company)
+    
+    nombre_administrador = fields.Char(related='company_id.nombre_administrador', string='Nombre del administrador', store=False)
+    telefono_administrador = fields.Char(related='company_id.telefono_administrador', string='Teléfono del administrador', store=False)
+    email_administrador = fields.Char(related='company_id.email_administrador', string='Email del administrador', store=False)
+
+#--------
+
+
+    def rellenar_campos_demo(self):
+        float_fields = [f.name for f in self._fields.values() if f.name.startswith('t') and isinstance(f, fields.Float)]
+
+        campos_no_random = ['t00101', 't00136', 't00180']
+        campos_random = [f for f in float_fields if f not in campos_no_random]
+
+        for rec in self:
+            # Paso 1: Rellenar aleatoriamente todos los campos salvo los calculados
+            for field in campos_random:
+                setattr(rec, field, round(random.uniform(1000, 50000), 2))
+
+            # Paso 2: Calcular ACTIVO NO CORRIENTE [00101]
+            campos_anc = [f't00{str(i).zfill(3)}' for i in range(102, 136) if f't00{str(i).zfill(3)}' in float_fields]
+            rec.t00101 = sum(getattr(rec, f, 0.0) for f in campos_anc)
+
+            # Paso 3: Calcular ACTIVO CORRIENTE [00136]
+            campos_ac = [f't00{str(i).zfill(3)}' for i in range(137, 180) if f't00{str(i).zfill(3)}' in float_fields]
+            rec.t00136 = sum(getattr(rec, f, 0.0) for f in campos_ac)
+
+            # Paso 4: Calcular TOTAL ACTIVO [00180]
+            rec.t00180 = rec.t00101 + rec.t00136
+            # Paso 5: Calcular PASIVO + PN
+            total_pasivo_pn = rec.t00180  # Debe cuadrar con el activo total
+
+            # Generar pesos aleatorios para las 3 partes
+            pesos_pn = [random.uniform(1, 3) for _ in range(3)]
+            peso_total_pn = sum(pesos_pn)
+
+            # Calcular valores proporcionados
+            valores_pn = [round(total_pasivo_pn * (p / peso_total_pn), 2) for p in pesos_pn]
+
+            # Asignar
+            rec.t00185 = valores_pn[0]  # Patrimonio neto
+            rec.t00210 = valores_pn[1]  # Pasivo no corriente
+            rec.t00228 = valores_pn[2]  # Pasivo corriente
+
+            # Calcular TOTAL PN Y PASIVO
+            rec.t00252 = round(sum(valores_pn), 2)
+
+
+    
+
     t00003 = fields.Char(string="Ejercicio económico")
-    t00006 = fields.Char(string="NIF de la entidad declarante")
-    t00011 = fields.Char(string="Nombre o razón social de la entidad")
+    t00006 =t00006 = fields.Char(
+    string='NIF de la empresa [00006]',
+    compute='_compute_nif_empresa',
+    store=True,
+    readonly=True
+)
+
+    @api.depends('company_id')
+    def _compute_nif_empresa(self):
+        for record in self:
+            if record.company_id:
+                partner = self.env['res.company'].browse(record.company_id.id).partner_id
+                record.t00006 = partner.vat or ''
+            else:
+                record.t00006 = ''
+
+
+    t00011 = fields.Char(
+    string="Nombre o razón social de la entidad",
+    compute='_compute_nombre_empresa',
+    store=True,
+    readonly=True
+)
+    def recalculate_t00101(self):
+        for rec in self:
+            rec._compute_t00101()
+
+    @api.depends('company_id')
+    def _compute_nombre_empresa(self):
+        for record in self:
+            if record.company_id:
+                record.t00011 = record.company_id.name
+            else:
+                record.t00011 = ''
+
+
+
+    
+    def actualizar_datos_facturacion(self):
+        for rec in self:
+            year = int(rec.fiscal_year)
+            start_date = date(year, 1, 1)
+            end_date = date(year, 12, 31)
+
+            # Guardar fechas en el modelo
+            rec.date_start = start_date
+            rec.date_end = end_date
+
+            # 🧾 Facturas emitidas y rectificativas del año pasado
+            moves = rec.env['account.move'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('state', '=', 'posted'),
+                ('move_type', 'in', ['out_invoice', 'out_refund']),
+                ('invoice_date', '>=', start_date),
+                ('invoice_date', '<=', end_date),
+            ])
+            
+
+            # t00102: Inmovilizado intangible (cuentas 200000–209999)
+            lines_20 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', '=like', '20%'),
+                ('move_id.state', '=', 'posted'),
+            ])
+            rec.t00102 = sum(line.debit - line.credit for line in lines_20)
+            
+            
+            # t00111: Inmovilizado material (cuentas 21XXXX)
+            lines_21 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', '=like', '21%'),
+                ('move_id.state', '=', 'posted'),
+            ])
+            rec.t00111 = sum(line.debit - line.credit for line in lines_21)
+            
+            # t00115: Inversiones inmobiliarias (cuentas 22XXXX)
+            lines_22 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', '=like', '22%'),
+                ('move_id.state', '=', 'posted'),
+            ])
+            rec.t00115 = sum(line.debit - line.credit for line in lines_22)
+            
+            # t00118: Inversiones en empresas del grupo y asociadas a largo plazo (cuentas 24XXXX)
+            lines_24 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', '=like', '24%'),
+                ('move_id.state', '=', 'posted'),
+            ])
+            rec.t00118 = sum(line.debit - line.credit for line in lines_24)
+            
+            # t00126: Inversiones financieras a largo plazo (cuentas 25XXXX)
+            lines_25 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', '=like', '25%'),
+                ('move_id.state', '=', 'posted'),
+            ])
+            rec.t00126 = sum(line.debit - line.credit for line in lines_25)
+            
+            # t00134: Activos por impuesto diferido (cuentas 474XXX)
+            lines_474 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', '=like', '474%'),
+                ('move_id.state', '=', 'posted'),
+            ])
+            rec.t00134 = sum(line.debit - line.credit for line in lines_474)
+            
+            
+            # t00138: Existencias (cuentas 3XXXX)
+            lines_3 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', '=like', '3%'),
+                ('move_id.state', '=', 'posted'),
+            ])
+            rec.t00138 = sum(line.debit - line.credit for line in lines_3)
+            
+            # t00149: Deudores comerciales y otras cuentas a cobrar
+            lines_t00149 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', '=like', '43%'),
+                ('move_id.state', '=', 'posted'),
+            ])
+
+            # Incluimos otras cuentas de deudores: 46, 47, 54
+            lines_extra_t00149 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', '=like', '46%'),
+                ('move_id.state', '=', 'posted'),
+            ]) + rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', '=like', '47%'),
+                ('move_id.state', '=', 'posted'),
+            ]) + rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', '=like', '54%'),
+                ('move_id.state', '=', 'posted'),
+            ])
+
+            rec.t00149 = sum(line.debit - line.credit for line in lines_t00149 + lines_extra_t00149)
+            
+            # t00159: Otros deudores (472000)
+            lines_t00159 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', 'in', ['472000']),
+                ('move_id.state', '=', 'posted'),
+            ])
+
+            rec.t00159 = sum(line.debit - line.credit for line in lines_t00159)
+            
+            # t00167: Inversiones financieras a corto plazo (cuentas 54XXXX, excluyendo grupo)
+            lines_t00167 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', '=like', '54%'),
+                ('move_id.state', '=', 'posted'),
+            ])
+            rec.t00167 = sum(line.debit - line.credit for line in lines_t00167)
+            
+            # t00177: Efectivo y otros activos líquidos equivalentes (cuentas 57XXXX)
+            lines_t00177 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', '=like', '57%'),
+                ('move_id.state', '=', 'posted'),
+            ])
+            rec.t00177 = sum(line.debit - line.credit for line in lines_t00177)
+
+            
+            # t00188: Capital escriturado cuenta 100000 de Odoo
+            domain_capital = [
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', '=', '100000'),
+                ('move_id.state', '=', 'posted'),
+            ]
+            apuntes_capital = rec.env['account.move.line'].search(domain_capital)
+            rec.t00188 = sum(line.debit - line.credit for line in apuntes_capital)
+
+
+            # t00255: Base imponible (sin IVA)
+            rec.t00255 = sum(m.amount_untaxed * (-1 if m.move_type == 'out_refund' else 1) for m in moves)
+
+            # t00256: Total facturado con IVA (ventas brutas)
+            rec.t00256 = sum(m.amount_total * (-1 if m.move_type == 'out_refund' else 1) for m in moves)
+
+            # t00150: Clientes a corto plazo (pendientes al 31/12 del año pasado)
+            # t00150: Clientes por ventas y prestaciones de servicios a corto plazo (cuenta 430000)
+            lines_t00150 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', '=', '430000'),
+                ('move_id.state', '=', 'posted'),
+            ])
+            rec.t00150 = sum(line.debit - line.credit for line in lines_t00150)
+
+            # t00151: Clientes a largo plazo (no implementado aún se suman todos en t00150)
+            rec.t00151 = 0.0
+            
+            # t00158: Accionistas (socios) por desembolsos exigidos (cuentas 103XXX y 104XXX)
+            lines_t00158 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', 'in', ['103000', '103400', '104000', '104400']),
+                ('move_id.state', '=', 'posted'),
+            ])
+            rec.t00158 = sum(line.debit - line.credit for line in lines_t00158)
+
+            # t00160: Inversiones en empresas del grupo y asociadas a corto plazo (cuentas 53XXXX)
+            lines_t00160 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', '=like', '53%'),
+                ('move_id.state', '=', 'posted'),
+            ])
+            rec.t00160 = sum(line.debit - line.credit for line in lines_t00160)
+            
+            # t00176: Periodificaciones a corto plazo (cuentas 480XXX, 485XXX, 486XXX)
+            lines_t00176 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', '=like', '48%'),
+                ('move_id.state', '=', 'posted'),
+            ])
+            rec.t00176 = sum(line.debit - line.credit for line in lines_t00176)
+            
+            # t00180: TOTAL ACTIVO = Activo no corriente + Activo corriente + Desembolsos exigidos
+            rec.t00180 = rec.t00101 + rec.t00136 + rec.t00158
+            
+            # t00186: Fondos propios = suma de sus componentes
+            rec.t00186 = sum([
+                rec.t00188,  # Capital escriturado
+                rec.t00191,  # Reservas
+                rec.t00195,  # Resultados anteriores
+                rec.t00199,  # Resultado del ejercicio
+                rec.t00204,  # Otras aportaciones de socios
+                rec.t00207,  # Dividendos a cuenta (valor negativo si es pasivo)
+            ])
+            
+            # t00188: Capital escriturado (cuenta 100000)
+            lines_t00188 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', '=', '100000'),
+                ('move_id.state', '=', 'posted'),
+            ])
+            rec.t00188 = sum(line.credit - line.debit for line in lines_t00188)
+            
+            # t00199: Resultado del ejercicio (cuenta 129000)
+            lines_t00199 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                ('account_id.code', '=', '129000'),
+                ('move_id.state', '=', 'posted'),
+            ])
+            rec.t00199 = sum(line.credit - line.debit for line in lines_t00199)
+
+
+
+
+            # t00210: PASIVO NO CORRIENTE (cuentas 14XXXX, 15XXXX, 16XXXX, 17XXXX, 18XXXX)
+            lines_t00210 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                '|',
+                    ('account_id.code', '=like', '14%'),
+                    '|',
+                        ('account_id.code', '=like', '15%'),
+                        '|',
+                            ('account_id.code', '=like', '16%'),
+                            '|',
+                                ('account_id.code', '=like', '17%'),
+                                ('account_id.code', '=like', '18%'),
+                ('move_id.state', '=', 'posted'),
+            ])
+            rec.t00210 = sum(line.credit - line.debit for line in lines_t00210)
+            
+            # t00239: Acreedores comerciales y otras cuentas a pagar
+            lines_t00239 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                '|',
+                    ('account_id.code', '=like', '41%'),
+                    '|',
+                        ('account_id.code', 'in', ['410000', '475100', '477000']),
+                        ('account_id.code', '=like', '465%'),
+                ('move_id.state', '=', 'posted'),
+            ])
+            rec.t00239 = sum(line.credit - line.debit for line in lines_t00239)
+            
+            # t00249: Otros acreedores (cuentas varias no comerciales)
+            lines_t00249 = rec.env['account.move.line'].search([
+                ('company_id', '=', rec.company_id.id),
+                ('date', '>=', start_date),
+                ('date', '<=', end_date),
+                '|',
+                    ('account_id.code', '=like', '465%'),
+                    '|',
+                        ('account_id.code', '=like', '466%'),
+                        '|',
+                            ('account_id.code', '=like', '476%'),
+                            '|',
+                                ('account_id.code', '=like', '555%'),
+                                '|',
+                                    ('account_id.code', '=like', '529%'),
+                                    ('account_id.code', '=like', '553%'),
+                ('move_id.state', '=', 'posted'),
+            ])
+            rec.t00249 = sum(line.credit - line.debit for line in lines_t00249)
+
+
+
+
+
+
+
+
+
+
+# t00101: ACTIVO NO CORRIENTE = suma de sus componentes
+            rec.t00101 = sum([
+                rec.t00102,  # Inmovilizado intangible
+                rec.t00111,  # Inmovilizado material
+                rec.t00115,  # Inversiones inmobiliarias
+                rec.t00118,  # Inversiones en empresas del grupo y asociadas
+                rec.t00126,  # Inversiones financieras a largo plazo
+                rec.t00134,  # Activos por impuesto diferido
+                rec.t00135,  # Deudores comerciales no corrientes (si se implementa)
+            ])
+            
+# t00136: ACTIVO CORRIENTE = suma de sus componentes
+            rec.t00136 = sum([
+                rec.t00138,  # Existencias
+                rec.t00149,  # Deudores comerciales y otras cuentas a cobrar
+                rec.t00159,  # Otros deudores
+                rec.t00160,  # Inversiones en empresas del grupo a corto plazo
+                rec.t00167,  # Inversiones financieras a corto plazo
+                rec.t00176,  # Periodificaciones a corto plazo
+                rec.t00177,  # Efectivo y otros activos líquidos equivalentes
+            ])
+            
+            # t00252: TOTAL PATRIMONIO NETO Y PASIVO
+            rec.t00252 = rec.t00185 + rec.t00210 + rec.t00228
+
+
+# Declaracion de campos del modelo Modelo200Declaration
+
     t00012 = fields.Char(string="Indicador de página complementaria. En blanco")
 
-        # Página 3: Balance Activo (I)
-    t00101 = fields.Float(string="ACTIVO NO CORRIENTE [00101]")
-    t00102 = fields.Float(string="Inmovilizado intangible [00102]")
+# Página 3: Balance Activo (I)
+    t00101 = fields.Monetary(
+    string="ACTIVO NO CORRIENTE [00101]",
+    compute="_compute_t00101",
+    store=True,
+    readonly=True
+)
+    t00102 = fields.Monetary(
+    string="Inmovilizado intangible [00102]",
+    currency_field='currency_id'
+)
     t00103 = fields.Float(string="Desarrollo [00103]")
     t00104 = fields.Float(string="Concesiones [00104]")
     t00105 = fields.Float(string="Patentes, licencias, marcas y similares [00105]")
@@ -37,10 +525,20 @@ class Modelo200Declaration(models.Model):
     t00112 = fields.Float(string="Terrenos y construcciones [00112]")
     t00113 = fields.Float(string="Instalaciones técnicas y otro inmovilizado material [00113]")
     t00114 = fields.Float(string="Inmovilizado en curso y anticipos [00114]")
-    t00115 = fields.Float(string="Inversiones inmobiliarias [00115]")
+    
+    t00115 = fields.Monetary(
+    string="Inversiones inmobiliarias [00115]",
+    currency_field='currency_id'
+)
+
     t00116 = fields.Float(string="Terrenos [00116]")
     t00117 = fields.Float(string="Construcciones [00117]")
-    t00118 = fields.Float(string="Inversiones en empresas del grupo y asociadas a largo plazo [00118]")
+    
+    t00118 = fields.Monetary(
+    string="Inversiones en empresas del grupo y asociadas a largo plazo [00118]",
+    currency_field='currency_id'
+)
+
     t00119 = fields.Float(string="Instrumentos de patrimonio [00119]")
     t00120 = fields.Float(string="Créditos a empresas [00120]")
     t00121 = fields.Float(string="Valores representativos de deuda [00121]")
@@ -48,7 +546,11 @@ class Modelo200Declaration(models.Model):
     t00123 = fields.Float(string="Otros activos financieros [00123]")
     t00124 = fields.Float(string="Otras inversiones [00124]")
     t00125 = fields.Float(string="Resto [00125]")
-    t00126 = fields.Float(string="Inversiones financieras a largo plazo [00126]")
+    t00126 = fields.Monetary(
+    string="Inversiones financieras a largo plazo [00126]",
+    currency_field='currency_id'
+)
+
     t00127 = fields.Float(string="Instrumentos de patrimonio [00127]")
     t00128 = fields.Float(string="Créditos a terceros [00128]")
     t00129 = fields.Float(string="Valores representativos de deuda [00129]")
@@ -56,11 +558,26 @@ class Modelo200Declaration(models.Model):
     t00131 = fields.Float(string="Otros activos financieros [00131]")
     t00132 = fields.Float(string="Otras inversiones [00132]")
     t00133 = fields.Float(string="Resto [00133]")
-    t00134 = fields.Float(string="Activos por impuesto diferido [00134]")
+    
+    t00134 = fields.Monetary(
+    string="Activos por impuesto diferido [00134]",
+    currency_field='currency_id'
+)
+
     t00135 = fields.Float(string="Deudores comerciales no corrientes [00135]")
-    t00136 = fields.Float(string="ACTIVO CORRIENTE [00136]")
+    
+    t00136 = fields.Monetary(
+    string="ACTIVO CORRIENTE [00136]",
+    currency_field='currency_id'
+)
+
     t00137 = fields.Float(string="Activos no corrientes mantenidos para la venta [00137]")
-    t00138 = fields.Float(string="Existencias [00138]")
+    
+    t00138 = fields.Monetary(
+    string="Existencias [00138]",
+    currency_field='currency_id'
+)
+
     t00139 = fields.Float(string="Comerciales [00139]")
     t00140 = fields.Float(string="Materias primas y otros aprovisionamientos [00140]")
     t00141 = fields.Float(string="Productos en curso [00141]")
@@ -75,25 +592,55 @@ class Modelo200Declaration(models.Model):
     
     
    # Página 4: Balance Activo (II)
-    t00149 = fields.Float(string="Deudores comerciales y otras cuentas a cobrar [00149]")
-    t00150 = fields.Float(string="Clientes por ventas y prestaciones de servicios a corto plazo [00150]")
-    t00151 = fields.Float(string="Clientes por ventas y prestaciones de servicios a largo plazo [00151]")
+    t00149 = fields.Monetary(
+    string="Deudores comerciales y otras cuentas a cobrar [00149]",
+    currency_field='currency_id'
+)
+
+    t00150 = fields.Monetary(
+        string="Clientes por ventas y prestaciones de servicios a corto plazo [00150]",
+        currency_field='currency_id'
+)
+
+    t00151 = fields.Monetary(
+        string="Clientes por ventas y prestaciones de servicios a largo plazo [00151]",
+        currency_field='currency_id'
+)
+
     t00152 = fields.Float(string="Clientes por ventas y prestaciones de servicios dudoso cobro [00152]")
     t00153 = fields.Float(string="Clientes empresas del grupo y asociadas [00153]")
     t00154 = fields.Float(string="Deudores varios [00154]")
     t00155 = fields.Float(string="Personal [00155]")
     t00156 = fields.Float(string="Activos por impuesto corriente [00156]")
     t00157 = fields.Float(string="Otros créditos con las Administraciones Públicas [00157]")
-    t00158 = fields.Float(string="Accionistas (socios) por desembolsos exigidos [00158]")
-    t00159 = fields.Float(string="Otros deudores [00159]")
-    t00160 = fields.Float(string="Inversiones en empresas del grupo y asociadas a corto plazo [00160]")
+    
+    t00158 = fields.Monetary(
+        string="Accionistas (socios) por desembolsos exigidos [00158]",
+        currency_field='currency_id'
+)
+
+    t00159 = fields.Monetary(
+    string="Otros deudores [00159]",
+    currency_field='currency_id'
+)
+
+    t00160 = fields.Monetary(
+    string="Inversiones en empresas del grupo y asociadas a corto plazo [00160]",
+    currency_field='currency_id'
+)
+
     t00161 = fields.Float(string="Instrumentos de patrimonio [00161]")
     t00162 = fields.Float(string="Créditos a empresas [00162]")
     t00163 = fields.Float(string="Valores representativos de deuda [00163]")
     t00164 = fields.Float(string="Derivados [00164]")
     t00165 = fields.Float(string="Otros activos financieros [00165]")
     t00166 = fields.Float(string="Resto [00166]")
-    t00167 = fields.Float(string="Inversiones financieras a corto plazo [00167]")
+    
+    t00167 = fields.Monetary(
+    string="Inversiones financieras a corto plazo [00167]",
+    currency_field='currency_id'
+)
+
     t00168 = fields.Float(string="Instrumentos de patrimonio [00168]")
     t00169 = fields.Float(string="Créditos a terceros [00169]")
     t00170 = fields.Float(string="Valores representativos de deuda [00170]")
@@ -102,20 +649,48 @@ class Modelo200Declaration(models.Model):
     t00173 = fields.Float(string="Resto [00173]")
     t00174 = fields.Float(string="Otras inversiones [00174]")
     t00175 = fields.Float(string="Resto [00175]")
-    t00176 = fields.Float(string="Periodificaciones a corto plazo [00176]")
-    t00177 = fields.Float(string="Efectivo y otros activos líquidos equivalentes [00177]")
+    
+    t00176 = fields.Monetary(
+    string="Periodificaciones a corto plazo [00176]",
+    currency_field='currency_id'
+)
+
+    t00177 = fields.Monetary(
+    string="Efectivo y otros activos líquidos equivalentes [00177]",
+    currency_field='currency_id'
+)
+
     t00178 = fields.Float(string="Tesorería [00178]")
     t00179 = fields.Float(string="Otros activos líquidos equivalentes [00179]")
-    t00180 = fields.Float(string="TOTAL ACTIVO [00180]")
+    
+    t00180 = fields.Monetary(
+    string="TOTAL ACTIVO [00180]",
+    currency_field='currency_id'
+)
+
 
 
 
     # Página 5: Balance Pasivo (I)
     
     t00185 = fields.Float(string="PATRIMONIO NETO [00185]")
-    t00186 = fields.Float(string="Fondos propios [00186]")
+    
+    t00186 = fields.Monetary(
+    string="Fondos propios [00186]",
+    currency_field='currency_id'
+)
+
     t00187 = fields.Float(string="Capital [00187]")
-    t00188 = fields.Float(string="Capital escriturado [00188]")
+    
+    t00188 = fields.Monetary(
+    string="Capital escriturado [00188]",
+    currency_field='currency_id'
+)
+
+    
+
+
+    
     t00189 = fields.Float(string="Capital no exigido [00189]")
     t00764 = fields.Float(string="Capital cooperativo suscrito (cooperativas) [00764]")
     t00765 = fields.Float(string="Capital cooperativo no exigido (cooperativas) [00765]")
@@ -134,7 +709,12 @@ class Modelo200Declaration(models.Model):
     t00196 = fields.Float(string="Remanente [00196]")
     t00197 = fields.Float(string="Resultados negativos de ejercicios anteriores [00197]")
     t00198 = fields.Float(string="Otras aportaciones de socios [00198]")
-    t00199 = fields.Float(string="Resultado del ejercicio [00199]")
+    
+    t00199 = fields.Monetary(
+    string="Resultado del ejercicio [00199]",
+    currency_field='currency_id'
+)
+
     t00200 = fields.Float(string="Dividendo a cuenta [00200]")
     t00768 = fields.Float(string="Retorno cooperativo y remuneración discrecional a cuenta entregado en el ejercicio) (cooperativas) [00768]")
     t00769 = fields.Float(string="Fondos capitalizados (cooperativas) [00769]")
@@ -147,7 +727,11 @@ class Modelo200Declaration(models.Model):
     t00207 = fields.Float(string="Otros [00207]")
     t00208 = fields.Float(string="Ajustes en patrimonio neto [00208]")
     t00209 = fields.Float(string="Subvenciones, donaciones y legados recibidos [00209]")
-    t00210 = fields.Float(string="PASIVO NO CORRIENTE [00210]")
+    t00210 = fields.Monetary(
+    string="PASIVO NO CORRIENTE [00210]",
+    currency_field='currency_id'
+)
+
     t00780 = fields.Float(string="Fondo de Educación, Formación y Promoción a largo plazo (cooperativas) [00780]")
     t00781 = fields.Float(string="Deudas con características especiales a largo plazo (cooperativas) [00781]")
     t00782 = fields.Float(string="Capital reembolsable exigible (cooperativas) [00782]")
@@ -190,7 +774,14 @@ class Modelo200Declaration(models.Model):
     t00236 = fields.Float(string="Otros pasivos financieros [00236]")
     t00237 = fields.Float(string="Otras deudas a corto plazo [00237]")
     t00238 = fields.Float(string="Deudas con empresas del grupo y asociadas a corto plazo [00238]")
-    t00239 = fields.Float(string="Acreedores comerciales y otras cuentas a pagar [00239]")
+    
+    
+    t00249 = fields.Monetary(
+        string="Otros acreedores [00249]",
+        currency_field='currency_id'
+)
+
+
     t00240 = fields.Float(string="Proveedores [00240]")
     t00241 = fields.Float(string="Proveedores - Proveedores a largo plazo [00241]")
     t00242 = fields.Float(string="Proveedores - Proveedores a corto plazo [00242]")
@@ -489,7 +1080,7 @@ class Modelo200Declaration(models.Model):
     _name = 'modelo200.declaration'
     _description = "Declaración IS - Modelo 200"
 
-    company_id = fields.Many2one('res.company', string="Empresa", required=True, default=lambda self: self.env.company)
+    company_id = fields.Many2one('res.company', string="Empresa", required=True, default=lambda self: self.env.company.id)
     fiscal_year = fields.Char(string="Ejercicio", required=True, default=lambda self: str(fields.Date.today().year - 1))
     date_start = fields.Date(string="Inicio Ejercicio")
     date_end = fields.Date(string="Fin Ejercicio")
@@ -557,33 +1148,3 @@ import base64
 import logging
 _logger = logging.getLogger(__name__)
 
-class Modelo200Declaration(models.Model):
-    _inherit = 'modelo200.declaration'
-
-    xml_file = fields.Binary("Archivo XML", readonly=True)
-    xml_filename = fields.Char("Nombre del archivo XML")
-
-    def action_generate_xml(self):
-        self.ensure_one()
-        root = ET.Element("Modelo200")
-
-        for tipo_pagina, campos in estructura_xml_fija.items():
-            nodo_pagina = ET.SubElement(root, tipo_pagina)
-            for etiqueta in campos:
-                campo_odoo = "t" + etiqueta[1:]
-                valor = getattr(self, campo_odoo, '')
-                if valor in [False, None]:
-                    valor = ''
-                nodo = ET.SubElement(nodo_pagina, etiqueta)
-                nodo.text = str(valor)
-                _logger.info(f"Campo {campo_odoo}: {valor}")
-
-        xml_bytes = ET.tostring(root, encoding="utf-8", method="xml")
-        self.xml_file = base64.b64encode(xml_bytes)
-        self.xml_filename = "modelo200.xml"
-
-        return {
-            "type": "ir.actions.act_url",
-            "url": f"/web/content?model={self._name}&id={self.id}&field=xml_file&download=true&filename={self.xml_filename}",
-            "target": "self",
-        }
