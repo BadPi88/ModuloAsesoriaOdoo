@@ -19,10 +19,8 @@
             string="Rellenar datos"
             class="btn-secondary"
             icon="fa-magic" />
-          <button name="actualizar_datos_facturacion" string="Actualizar desde facturación"
+          <button name="actualizar_datos_facturacion" string="Actualizar con datos de contabilidad"
             type="object" class="btn-primary" />
-
-
         </header>
         <sheet>
 
@@ -195,8 +193,9 @@
             </page>
 
             <!--P5-->
-            <page string=" Balance: Patrimonio neto y pasivo">
-              <group col="6">
+            <page string="Balance: Patrimonio neto y pasivo">
+              <group col="5">
+
                 <group>
                   <field name="t00185" string="PATRIMONIO NETO [00185]" />
                   <field name="t00186" string="Fondos propios [00186]" />
@@ -209,12 +208,12 @@
                   <field name="t00190" string="Prima de emisión [00190]" />
                   <field name="t00191" string="Reservas [00191]" />
                   <field name="t00192" string="Legal y estatutarias [00192]" />
-                </group>
-
-                <group>
                   <field name="t00193" string="Otras reservas [00193]" />
                   <field name="t00702" string="Reserva de revalorización [00702]" />
                   <field name="t01001" string="Reserva de capitalización [01001]" />
+                </group>
+
+                <group>
                   <field name="t01002" string="Reserva de nivelación [01002]" />
                   <field name="t00712" string="Fondo de reserva obligatorio de cooperativas [00712]" />
                   <field name="t00766"
@@ -224,69 +223,61 @@
                     string="Acciones y participaciones en patrimonio propias [00194]" />
                   <field name="t00195" string="Resultados de ejercicios anteriores [00195]" />
                   <field name="t00196" string="Remanente [00196]" />
-                </group>
-
-                <group>
                   <field name="t00197"
                     string="Resultados negativos de ejercicios anteriores [00197]" />
                   <field name="t00198" string="Otras aportaciones de socios [00198]" />
                   <field name="t00199" string="Resultado del ejercicio [00199]" />
                   <field name="t00200" string="Dividendo a cuenta [00200]" />
-                  <field name="t00768"
-                    string="Retorno cooperativo y remuneración discrecional a cuenta entregado en el ejercicio) (cooperativas) [00768]" />
+                  <field name="t00768" string="Retorno cooperativo entregado (cooperativas) [00768]" />
                   <field name="t00769" string="Fondos capitalizados (cooperativas) [00769]" />
-                  <field name="t00201" string="Otros instrumentos de patrimonio neto [00201]" />
-                  <field name="t00202" string="Ajustes por cambios de valor [00202]" />
-                  <field name="t00203"
-                    string="Activos financieros a valor razonable con cambios en el patrimonio neto [00203]" />
-                  <field name="t00204" string="Operaciones de cobertura [00204]" />
                 </group>
 
                 <group>
+                  <field name="t00201" string="Otros instrumentos de patrimonio neto [00201]" />
+                  <field name="t00202" string="Ajustes por cambios de valor [00202]" />
+                  <field name="t00203" string="Activos financieros a valor razonable [00203]" />
+                  <field name="t00204" string="Operaciones de cobertura [00204]" />
                   <field name="t00205" string="Activos no corrientes y pasivos vinculados [00205]" />
                   <field name="t00206" string="Diferencia de conversión [00206]" />
                   <field name="t00207" string="Otros [00207]" />
                   <field name="t00208" string="Ajustes en patrimonio neto [00208]" />
                   <field name="t00209" string="Subvenciones, donaciones y legados recibidos [00209]" />
                   <field name="t00210" string="PASIVO NO CORRIENTE [00210]" />
-                  <field name="t00780"
-                    string="Fondo de Educación, Formación y Promoción a largo plazo (cooperativas) [00780]" />
-                  <field name="t00781"
-                    string="Deudas con características especiales a largo plazo (cooperativas) [00781]" />
+                  <field name="t00780" string="Fondo de Educación (cooperativas) [00780]" />
+                  <field name="t00781" string="Deudas especiales largo plazo (cooperativas) [00781]" />
                   <field name="t00782" string="Capital reembolsable exigible (cooperativas) [00782]" />
-                  <field name="t00783"
-                    string=" Fondos especiales calificados como pasivo (cooperativas) [00783]" />
                 </group>
 
                 <group>
+                  <field name="t00783" string="Fondos especiales como pasivo (cooperativas) [00783]" />
                   <field name="t00784"
-                    string="Acreedores por fondos capitalizados a largo plazo (cooperativas) [00784]" />
-                  <field name="t00211" string=" Provisiones a largo plazo [00211]" />
-                  <field name="t00212"
-                    string="Obligaciones por prestaciones a largo plazo al personal [00212]" />
-                  <field name="t00213" string=" Actuaciones medioambientales [00213]" />
-                  <field name="t00214" string=" Provisiones por reestructuración [00214]" />
-                  <field name="t00215" string=" Otras provisiones [00215]" />
-                  <field name="t00216" string=" Deudas a largo plazo [00216]" />
-                  <field name="t00217" string=" Obligaciones y otros valores negociables [00217]" />
-                  <field name="t00218" string=" Deudas con entidades de crédito [00218]" />
-                  <field name="t00219" string=" Acreedores por arrendamiento financiero [00219]" />
+                    string="Acreedores por fondos capitalizados (cooperativas) [00784]" />
+                  <field name="t00211" string="Provisiones a largo plazo [00211]" />
+                  <field name="t00212" string="Obligaciones por prestaciones a largo plazo [00212]" />
+                  <field name="t00213" string="Actuaciones medioambientales [00213]" />
+                  <field name="t00214" string="Provisiones por reestructuración [00214]" />
+                  <field name="t00215" string="Otras provisiones [00215]" />
+                  <field name="t00216" string="Deudas a largo plazo [00216]" />
+                  <field name="t00217" string="Obligaciones y valores negociables [00217]" />
+                  <field name="t00218" string="Deudas con entidades de crédito [00218]" />
+                  <field name="t00219" string="Acreedores por arrendamiento financiero [00219]" />
+                  <field name="t00220" string="Derivados [00220]" />
+                  <field name="t00221" string="Otros pasivos financieros [00221]" />
                 </group>
 
                 <group>
-                  <field name="t00220" string=" Derivados [00220]" />
-                  <field name="t00221" string=" Otros pasivos financieros [00221]" />
-                  <field name="t00222" string=" Otras deudas a largo plazo [00222]" />
-                  <field name="t00223"
-                    string="Deudas con empresas del grupo y asociadas a largo plazo [00223]" />
-                  <field name="t00224" string=" Pasivos por impuesto diferido [00224]" />
-                  <field name="t00225" string=" Periodificaciones a largo plazo [00225]" />
-                  <field name="t00226" string=" Acreedores comerciales no corrientes [00226]" />
+                  <field name="t00222" string="Otras deudas a largo plazo [00222]" />
+                  <field name="t00223" string="Deudas con empresas del grupo a largo plazo [00223]" />
+                  <field name="t00224" string="Pasivos por impuesto diferido [00224]" />
+                  <field name="t00225" string="Periodificaciones a largo plazo [00225]" />
+                  <field name="t00226" string="Acreedores comerciales no corrientes [00226]" />
                   <field name="t00227"
                     string="Deuda con características especiales a largo plazo [00227]" />
                 </group>
+
               </group>
             </page>
+
 
             <!-- P6  Patrimonio neto y pasivo -->
             <page string=" Balance: Patrimonio neto y pasivo (II)">

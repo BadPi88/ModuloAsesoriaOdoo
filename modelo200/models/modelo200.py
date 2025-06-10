@@ -3,6 +3,17 @@ import base64
 import random
 from datetime import date
 
+# Genera el archivo XML de la declaración con los datos calculados
+# Este archivo puede ser importado en la sede electrónica de la AEAT
+
+    # Función principal para generar el archivo XML del Modelo 200
+    # Llama a compute_financials(), genera una cadena XML y la guarda como archivo adjunto binario
+
+from ..utils.estructura_xml_fija import estructura_xml_fija
+import xml.etree.ElementTree as ET
+import base64
+import logging
+_logger = logging.getLogger(__name__)
 
 # Modelo principal para generar la declaración Modelo 200 y almacenar sus datos contables y fiscales
 class Modelo200Declaration(models.Model):
@@ -51,7 +62,7 @@ class Modelo200Declaration(models.Model):
     
     )
     
-   
+
 
 #------------ moneda
     
@@ -166,7 +177,7 @@ class Modelo200Declaration(models.Model):
             rec.date_start = start_date
             rec.date_end = end_date
 
-            # 🧾 Facturas emitidas y rectificativas del año pasado
+            # Facturas emitidas y rectificativas del año pasado
             moves = rec.env['account.move'].search([
                 ('company_id', '=', rec.company_id.id),
                 ('state', '=', 'posted'),
@@ -775,6 +786,11 @@ class Modelo200Declaration(models.Model):
     t00237 = fields.Float(string="Otras deudas a corto plazo [00237]")
     t00238 = fields.Float(string="Deudas con empresas del grupo y asociadas a corto plazo [00238]")
     
+    t00239 = fields.Monetary(
+    string="Acreedores comerciales y otras cuentas a pagar [00239]",
+    currency_field='currency_id'
+)
+
     
     t00249 = fields.Monetary(
         string="Otros acreedores [00249]",
@@ -1135,16 +1151,4 @@ class Modelo200Declaration(models.Model):
                 ('move_id.state', '=', 'posted')
             ])
             rec.equity_start = sum(line.debit - line.credit for line in opening_lines)
-
-# Genera el archivo XML de la declaración con los datos calculados
-# Este archivo puede ser importado en la sede electrónica de la AEAT
-
-    # Función principal para generar el archivo XML del Modelo 200
-    # Llama a compute_financials(), genera una cadena XML y la guarda como archivo adjunto binario
-
-from ..utils.estructura_xml_fija import estructura_xml_fija
-import xml.etree.ElementTree as ET
-import base64
-import logging
-_logger = logging.getLogger(__name__)
 
